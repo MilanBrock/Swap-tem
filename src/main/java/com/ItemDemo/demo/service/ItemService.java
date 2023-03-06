@@ -3,13 +3,10 @@ package com.ItemDemo.demo.service;
 import com.ItemDemo.demo.dao.ItemRepository;
 import com.ItemDemo.demo.entity.Item;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
-import java.beans.BeanProperty;
 import java.util.List;
 import java.util.Optional;
-
 
 @Service
 public class ItemService {
