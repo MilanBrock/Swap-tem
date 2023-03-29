@@ -1,6 +1,6 @@
 package com.ItemDemo.demo.service;
 
-import com.ItemDemo.demo.dao.ItemRepository;
+import com.ItemDemo.demo.dao.ItemRepositoryInterface;
 import com.ItemDemo.demo.entity.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,8 +10,14 @@ import java.util.Optional;
 
 @Service
 public class ItemService {
+
+    final ItemRepositoryInterface itemRepository;
+
     @Autowired
-    private ItemRepository itemRepository;
+    public ItemService(ItemRepositoryInterface itemRepositoryInput){
+        this.itemRepository = itemRepositoryInput;
+    }
+
 
     public Item createItem(Item item){
         return itemRepository.save(item);

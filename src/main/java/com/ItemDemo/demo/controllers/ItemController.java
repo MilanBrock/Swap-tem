@@ -9,10 +9,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
+@RequestMapping("/api/Item")
 public class ItemController {
+
+    final ItemService itemService;
+
     @Autowired
-    private ItemService itemService;
+    public ItemController(ItemService itemServiceInput){
+        this.itemService = itemServiceInput;
+    }
 
     @PostMapping("/addItem")
     public Item addItem(@RequestBody Item item){
