@@ -7,14 +7,37 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
 public class ItemRepositoryTest implements ItemRepositoryInterface {
+
+    ArrayList<Item> items;
+
+    public ItemRepositoryTest(){
+        items = new ArrayList<>();
+        ListFill();
+    }
+
+    public void ListFill(){
+        Item item1 = new Item(1,"ItemEen","ItemEenDescription");
+        Item item2 = new Item(2,"ItemTwee","ItemTweeDescription");
+        Item item3 = new Item(3,"ItemDrie","ItemDrieDescription");
+        items.add(item1);
+        items.add(item2);
+        items.add(item3);
+    }
+
+    @Override
+    public <S extends Item> S save(S entity) {
+        items.add(entity);
+        return entity;
+    }
+
     @Override
     public void flush() {
-
     }
 
     @Override
@@ -92,10 +115,7 @@ public class ItemRepositoryTest implements ItemRepositoryInterface {
         return null;
     }
 
-    @Override
-    public <S extends Item> S save(S entity) {
-        return entity;
-    }
+
 
     @Override
     public <S extends Item> List<S> saveAll(Iterable<S> entities) {
