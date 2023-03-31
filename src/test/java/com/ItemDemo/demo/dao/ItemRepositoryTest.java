@@ -119,7 +119,18 @@ public class ItemRepositoryTest implements ItemRepositoryInterface {
 
     @Override
     public <S extends Item> List<S> saveAll(Iterable<S> entities) {
-        return null;
+        List<S> inputItems = (List<S>) entities;
+
+        inputItems.get(0).setId(4);
+        inputItems.get(1).setId(5);
+        items.add(inputItems.get(0));
+        items.add(inputItems.get(1));
+
+        List<S> resultItems = new ArrayList<>();
+        resultItems.add((S)items.get(3));
+        resultItems.add((S)items.get(4));
+
+        return resultItems;
     }
 
     @Override
