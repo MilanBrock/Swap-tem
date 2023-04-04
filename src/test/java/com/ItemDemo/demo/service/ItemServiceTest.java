@@ -65,9 +65,7 @@ public class ItemServiceTest {
             assertEquals(itemList.get(i).getId() ,resultList.get(i).getId());
             assertEquals(itemList.get(i).getName() ,resultList.get(i).getName());
             assertEquals(itemList.get(i).getDescription() ,resultList.get(i).getDescription());
-
         }
-
     }
 
 
