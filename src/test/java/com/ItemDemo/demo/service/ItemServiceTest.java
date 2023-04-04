@@ -34,9 +34,6 @@ public class ItemServiceTest {
         // Act
         Item result = itemService.createItem(item);
 
-        // Fout voor test
-        result = new Item(2, "Item1Name", "Item1Description");
-
         // Assert
         assertEquals(item, result);
     }
