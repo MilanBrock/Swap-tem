@@ -14,5 +14,3 @@ jobs:
           distribution: 'temurin'
       - name: Create the JAR file with Maven
         run: mvn package
-      - name: Run the Unit Tests
-        run: mvn test
