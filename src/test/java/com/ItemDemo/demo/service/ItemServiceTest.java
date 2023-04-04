@@ -60,7 +60,6 @@ public class ItemServiceTest {
         itemList.get(1).setId(5);
         // Assert
 
-
         for (int i = 0; i < resultList.size(); i++){
             assertEquals(itemList.get(i).getId() ,resultList.get(i).getId());
             assertEquals(itemList.get(i).getName() ,resultList.get(i).getName());
