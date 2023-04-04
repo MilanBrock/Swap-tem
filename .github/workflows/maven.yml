@@ -12,7 +12,5 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Run the Maven verify phase
-        run: mvn --batch-mode --update-snapshots verify
-      - name: Run the Unit Tests
-        run: mvn test
+      - name: Create the JAR file with Maven
+        run: mvn package
