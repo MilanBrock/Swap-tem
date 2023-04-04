@@ -47,7 +47,7 @@ public class ItemController {
     }
 
     @DeleteMapping("/item/{id}")
-    public String deleteItem(@PathVariable int id){
+    public Boolean deleteItem(@PathVariable int id){
         return itemService.deleteItemById(id);
     }
 

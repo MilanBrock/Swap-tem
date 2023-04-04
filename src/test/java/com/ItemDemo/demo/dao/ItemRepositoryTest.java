@@ -135,7 +135,13 @@ public class ItemRepositoryTest implements ItemRepositoryInterface {
 
     @Override
     public Optional<Item> findById(Integer integer) {
-        return Optional.empty();
+        Optional<Item> itemResult = null;
+        for(int i = 0; i < items.size(); i++){
+            if(items.get(i).getId() == integer){
+                itemResult = Optional.ofNullable(items.get(i));
+            }
+        }
+        return itemResult;
     }
 
     @Override
@@ -145,7 +151,7 @@ public class ItemRepositoryTest implements ItemRepositoryInterface {
 
     @Override
     public List<Item> findAll() {
-        return null;
+        return items;
     }
 
     @Override
@@ -160,7 +166,11 @@ public class ItemRepositoryTest implements ItemRepositoryInterface {
 
     @Override
     public void deleteById(Integer integer) {
-
+        for(int i = 0; i < items.size(); i++){
+            if(items.get(i).getId() == integer){
+                items.remove(i);
+            }
+        }
     }
 
     @Override

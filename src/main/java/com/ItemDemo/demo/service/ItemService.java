@@ -49,9 +49,16 @@ public class ItemService {
         return oldItem;
     }
 
-    public String deleteItemById(int id){
-        itemRepository.deleteById(id);
-        return "Item got deleted";
+    public Boolean deleteItemById(int id){
+        Boolean succes = false;
+        Optional<Item> item = itemRepository.findById(id);
+
+        if(item != null){
+            itemRepository.deleteById(id);
+            succes = true;
+        }
+
+        return succes;
     }
 
 
