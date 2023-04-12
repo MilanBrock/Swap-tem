@@ -1,6 +1,6 @@
-package com.ItemDemo.demo.dao;
+package com.Swaptem.InventoryManagement.DAL;
 
-import com.ItemDemo.demo.entity.User;
+import com.Swaptem.InventoryManagement.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

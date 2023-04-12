@@ -1,6 +1,6 @@
-package com.ItemDemo.demo.dao;
+package com.Swaptem.InventoryManagement.DAL;
 
-import com.ItemDemo.demo.entity.Item;
+import com.Swaptem.InventoryManagement.Entity.Item;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,9 +22,9 @@ public class ItemRepositoryTest implements ItemRepositoryInterface {
     }
 
     public void ListFill(){
-        Item item1 = new Item(1,"ItemEen","ItemEenDescription");
-        Item item2 = new Item(2,"ItemTwee","ItemTweeDescription");
-        Item item3 = new Item(3,"ItemDrie","ItemDrieDescription");
+        Item item1 = new Item(1,"ItemEen","ItemEenDescription",0);
+        Item item2 = new Item(2,"ItemTwee","ItemTweeDescription",0);
+        Item item3 = new Item(3,"ItemDrie","ItemDrieDescription",0);
         items.add(item1);
         items.add(item2);
         items.add(item3);

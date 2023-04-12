@@ -1,7 +1,7 @@
-package com.ItemDemo.demo.service;
+package com.Swaptem.InventoryManagement.Service;
 
-import com.ItemDemo.demo.dao.ItemRepositoryInterface;
-import com.ItemDemo.demo.entity.Item;
+import com.Swaptem.InventoryManagement.DAL.ItemRepositoryInterface;
+import com.Swaptem.InventoryManagement.Entity.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,13 +18,9 @@ public class ItemService {
         this.itemRepository = itemRepositoryInput;
     }
 
-
-    public Item createItem(Item item){
-        return itemRepository.save(item);
-    }
-
-    public List<Item> createItems(List<Item> items){
-        return itemRepository.saveAll(items);
+    public boolean createItem(Item item){
+        itemRepository.save(item);
+        return true;
     }
 
     public Item getItemById(int id){
@@ -35,7 +31,7 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
-    public Item updateItem (Item item){
+    public boolean updateItem (Item item){
         Item oldItem = new Item();
         Optional<Item> optionalItem = itemRepository.findById(item.getId());
         if(optionalItem.isPresent()){
@@ -44,13 +40,13 @@ public class ItemService {
             oldItem.setDescription(item.getDescription());
             itemRepository.save(oldItem);
         } else {
-            return new Item();
+            return false;
         }
-        return oldItem;
+        return true;
     }
 
-    public Boolean deleteItemById(int id){
-        Boolean succes = false;
+    public boolean deleteItemById(int id){
+        boolean succes = false;
         Optional<Item> item = itemRepository.findById(id);
 
         if(item != null){

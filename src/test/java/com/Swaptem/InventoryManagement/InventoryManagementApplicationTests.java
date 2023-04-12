@@ -1,10 +1,10 @@
-package com.ItemDemo.demo;
+package com.Swaptem.InventoryManagement;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class InventoryManagementApplicationTests {
 
 	@Test
 	void contextLoads() {

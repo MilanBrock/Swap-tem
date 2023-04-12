@@ -1,4 +1,4 @@
-package com.ItemDemo.demo.entity;
+package com.Swaptem.InventoryManagement.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,10 +12,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class User {
+public class Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String username;
-    private String password;
+    private String name;
+    private String description;
+    private int currencyValue;
 }
