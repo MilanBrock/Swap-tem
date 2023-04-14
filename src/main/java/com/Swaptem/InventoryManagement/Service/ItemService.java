@@ -19,8 +19,11 @@ public class ItemService {
     }
 
     public boolean createItem(Item item){
-        itemRepository.save(item);
-        return true;
+        Item itemResult = itemRepository.save(item);
+        if( itemResult.getId() > 0){
+            return true;
+        }
+        return false;
     }
 
     public Item getItemById(int id){
@@ -47,7 +50,7 @@ public class ItemService {
 
     public boolean deleteItemById(int id){
         boolean succes = false;
-        Optional<Item> item = itemRepository.findById(id);
+        Item item = itemRepository.findById(id).orElse(null);
 
         if(item != null){
             itemRepository.deleteById(id);

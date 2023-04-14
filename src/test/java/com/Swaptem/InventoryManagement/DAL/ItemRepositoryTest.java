@@ -14,7 +14,7 @@ import java.util.function.Function;
 
 public class ItemRepositoryTest implements ItemRepositoryInterface {
 
-    ArrayList<Item> items;
+    public ArrayList<Item> items;
 
     public ItemRepositoryTest(){
         items = new ArrayList<>();
@@ -22,19 +22,50 @@ public class ItemRepositoryTest implements ItemRepositoryInterface {
     }
 
     public void ListFill(){
-        Item item1 = new Item(1,"ItemEen","ItemEenDescription",0);
-        Item item2 = new Item(2,"ItemTwee","ItemTweeDescription",0);
-        Item item3 = new Item(3,"ItemDrie","ItemDrieDescription",0);
+        Item item1 = new Item(1,"ItemEen","ItemEenDescription");
+        Item item2 = new Item(2,"ItemTwee","ItemTweeDescription");
+        Item item3 = new Item(3,"ItemDrie","ItemDrieDescription");
         items.add(item1);
         items.add(item2);
         items.add(item3);
     }
 
+
+    // Custom methods
     @Override
     public <S extends Item> S save(S entity) {
         items.add(entity);
+        entity.setId(items.size()+1);
         return entity;
     }
+
+    @Override
+    public Optional<Item> findById(Integer integer) {
+        Optional<Item> itemResult = Optional.empty();
+        for(int i = 0; i < items.size(); i++){
+            if(items.get(i).getId() == integer){
+                itemResult = Optional.ofNullable(items.get(i));
+            }
+        }
+        return itemResult;
+    }
+
+    @Override
+    public List<Item> findAll() {
+        return items;
+    }
+
+    @Override
+    public void deleteById(Integer integer) {
+        for(int i = 0; i < items.size(); i++){
+            if(items.get(i).getId() == integer){
+                items.remove(i);
+            }
+        }
+    }
+
+
+    // Unused methods
 
     @Override
     public void flush() {
@@ -115,43 +146,14 @@ public class ItemRepositoryTest implements ItemRepositoryInterface {
         return null;
     }
 
-
-
     @Override
     public <S extends Item> List<S> saveAll(Iterable<S> entities) {
-        List<S> inputItems = (List<S>) entities;
-
-        inputItems.get(0).setId(4);
-        inputItems.get(1).setId(5);
-        items.add(inputItems.get(0));
-        items.add(inputItems.get(1));
-
-        List<S> resultItems = new ArrayList<>();
-        resultItems.add((S)items.get(3));
-        resultItems.add((S)items.get(4));
-
-        return resultItems;
-    }
-
-    @Override
-    public Optional<Item> findById(Integer integer) {
-        Optional<Item> itemResult = null;
-        for(int i = 0; i < items.size(); i++){
-            if(items.get(i).getId() == integer){
-                itemResult = Optional.ofNullable(items.get(i));
-            }
-        }
-        return itemResult;
+        return null;
     }
 
     @Override
     public boolean existsById(Integer integer) {
         return false;
-    }
-
-    @Override
-    public List<Item> findAll() {
-        return items;
     }
 
     @Override
@@ -162,15 +164,6 @@ public class ItemRepositoryTest implements ItemRepositoryInterface {
     @Override
     public long count() {
         return 0;
-    }
-
-    @Override
-    public void deleteById(Integer integer) {
-        for(int i = 0; i < items.size(); i++){
-            if(items.get(i).getId() == integer){
-                items.remove(i);
-            }
-        }
     }
 
     @Override

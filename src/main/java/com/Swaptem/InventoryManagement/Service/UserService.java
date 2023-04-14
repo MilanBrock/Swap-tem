@@ -19,8 +19,11 @@ public class UserService {
 
 
     public boolean RegisterUser(User userInput){
-        userRepository.save(userInput);
-        return true;
+        User resultUser = userRepository.save(userInput);
+        if(resultUser.getId() > 0 ){
+            return true;
+        }
+        return false;
     }
 
     public User getUserById(int userId){
@@ -44,9 +47,9 @@ public class UserService {
 
     public boolean deleteUserById(int userId){
         boolean succes = false;
-        Optional<User> item = userRepository.findById(userId);
+        User user = userRepository.findById(userId).orElse(null);
 
-        if(item != null){
+        if(user != null){
             userRepository.deleteById(userId);
             succes = true;
         }

@@ -8,5 +8,4 @@ import lombok.Setter;
 public class ItemDTO {
     public String name;
     public String description;
-    public int currencyValue;
 }

@@ -18,5 +18,10 @@ public class Item {
     private int id;
     private String name;
     private String description;
-    private int currencyValue;
+
+
+    public Item(String nameInput, String descriptionInput){
+        this.name = nameInput;
+        this.description = descriptionInput;
+    }
 }

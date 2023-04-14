@@ -19,4 +19,11 @@ public class User {
     private String username;
     private String password;
     private int currency;
+
+
+    public User (String usernameInput, String passwordInput, int currencyInput){
+        this.username = usernameInput;
+        this.password = passwordInput;
+        this.currency = currencyInput;
+    }
 }
