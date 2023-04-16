@@ -25,4 +25,10 @@ public class Item {
         this.name = nameInput;
         this.description = descriptionInput;
     }
+
+    public Item(int idInput, String nameInput, String descriptionInput){
+        this.id = idInput;
+        this.name = nameInput;
+        this.description = descriptionInput;
+    }
 }
