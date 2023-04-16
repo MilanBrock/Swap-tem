@@ -2,9 +2,9 @@ package com.Swaptem.InventoryManagement.Controller;
 
 import com.Swaptem.InventoryManagement.DTO.UserDTO;
 import com.Swaptem.InventoryManagement.Entity.User;
-import com.Swaptem.InventoryManagement.Service.UserMapper;
-import com.Swaptem.InventoryManagement.Service.UserService;
-import com.Swaptem.InventoryManagement.Validation.UserValidation;
+import com.Swaptem.InventoryManagement.UnitTest.Service.UserMapper;
+import com.Swaptem.InventoryManagement.UnitTest.Service.UserService;
+import com.Swaptem.InventoryManagement.UnitTest.Validation.UserValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;

@@ -1,6 +1,6 @@
-package com.Swaptem.InventoryManagement.Service;
+package com.Swaptem.InventoryManagement.UnitTest.Service;
 
-import com.Swaptem.InventoryManagement.DAL.UserRepositoryInterface;
+import com.Swaptem.InventoryManagement.UnitTest.DAL.UserRepositoryInterface;
 import com.Swaptem.InventoryManagement.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

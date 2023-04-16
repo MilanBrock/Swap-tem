@@ -1,9 +1,7 @@
 package com.Swaptem.InventoryManagement;
 
-import com.Swaptem.InventoryManagement.DAL.ItemRepositoryInterface;
-import com.Swaptem.InventoryManagement.DAL.UserRepositoryInterface;
-import com.Swaptem.InventoryManagement.Entity.Item;
-import com.Swaptem.InventoryManagement.Entity.User;
+import com.Swaptem.InventoryManagement.UnitTest.DAL.ItemRepositoryInterface;
+import com.Swaptem.InventoryManagement.UnitTest.DAL.UserRepositoryInterface;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

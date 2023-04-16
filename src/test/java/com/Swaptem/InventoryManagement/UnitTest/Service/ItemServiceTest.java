@@ -1,8 +1,9 @@
-package com.Swaptem.InventoryManagement.Service;
+package com.Swaptem.InventoryManagement.UnitTest.Service;
 
-import com.Swaptem.InventoryManagement.DAL.ItemRepositoryTest;
+import com.Swaptem.InventoryManagement.UnitTest.DAL.ItemRepositoryTest;
 import com.Swaptem.InventoryManagement.Entity.Item;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
+@Tag("UnitTest")
 public class ItemServiceTest {
 
     private ItemService itemService;

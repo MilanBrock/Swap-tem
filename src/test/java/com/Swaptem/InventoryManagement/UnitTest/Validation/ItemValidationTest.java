@@ -1,14 +1,16 @@
-package com.Swaptem.InventoryManagement.Validation;
+package com.Swaptem.InventoryManagement.UnitTest.Validation;
 
 
 import com.Swaptem.InventoryManagement.Entity.Item;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
+@Tag("UnitTest")
 public class ItemValidationTest {
 
     private ItemValidation itemValidation;
