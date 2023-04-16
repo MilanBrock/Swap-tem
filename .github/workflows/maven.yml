@@ -12,15 +12,20 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Create the JAR file with Maven
-        run: mvn package        
+          
       - name: Install Newman to run REST API test
         run: npm install -g newman
         
+      - name: Create the JAR file with Maven
+        run: mvn package -DskipTests    
+      - name: Run the Unit tests
+        run: mvn test -Dgroups="UnitTest"
+      
+        
       - name: Start the Springboot application
         run: nohup mvn spring-boot:run > /dev/null 2>&1 &
-      - name: Wait for the application to start
-        run: sleep 10
+      - name: Wait 15 seconds for the application to start
+        run: sleep 15
       - name: Run Postman REST API tests
         run: newman run src/test/InventoryManagementRESTAPItest.postman_collection.json
       
