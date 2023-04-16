@@ -108,8 +108,8 @@
 								"exec": [
 									"pm.test(\"GET request for Item1\", () => {\r",
 									"  const responseJson = pm.response.json();\r",
-									"  pm.expect(responseJson.name).to.eql(\"Item1\");\r",
-									"  pm.expect(responseJson.description).to.eql(\"ItemDesc1\");\r",
+									"  pm.expect(responseJson.name).to.eql(\"Penguino\");\r",
+									"  pm.expect(responseJson.description).to.eql(\"Lives in the cold.\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Response time is less than 200ms\", () => {\r",
