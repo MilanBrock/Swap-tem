@@ -1,4 +1,4 @@
-package com.Swaptem.InventoryManagement.UnitTest.Service;
+package com.Swaptem.InventoryManagement.Service;
 
 import com.Swaptem.InventoryManagement.Entity.Item;
 import com.Swaptem.InventoryManagement.Entity.User;

@@ -16,9 +16,9 @@ public class Item {
     private String name;
     private String description;
 
-//    @ManyToOne
-//    @JoinColumn(name = "userID")
-//    private User owner;
+    @ManyToOne
+    @JoinColumn(name = "userID")
+    private User owner;
 
 
     public Item(String nameInput, String descriptionInput){
@@ -26,9 +26,9 @@ public class Item {
         this.description = descriptionInput;
     }
 
-//    public Item(int idInput, String nameInput, String descriptionInput){
-//        this.id = idInput;
-//        this.name = nameInput;
-//        this.description = descriptionInput;
-//    }
+    public Item(int idInput, String nameInput, String descriptionInput){
+        this.id = idInput;
+        this.name = nameInput;
+        this.description = descriptionInput;
+    }
 }

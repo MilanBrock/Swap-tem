@@ -1,5 +1,6 @@
 package com.Swaptem.InventoryManagement.UnitTest.DAL;
 
+import com.Swaptem.InventoryManagement.DAL.ItemRepositoryInterface;
 import com.Swaptem.InventoryManagement.Entity.Item;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;

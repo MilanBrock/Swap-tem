@@ -1,5 +1,8 @@
 package com.Swaptem.InventoryManagement.UnitTest.Service;
 
+import com.Swaptem.InventoryManagement.Service.InventoryService;
+import com.Swaptem.InventoryManagement.Service.ItemService;
+import com.Swaptem.InventoryManagement.Service.UserService;
 import com.Swaptem.InventoryManagement.UnitTest.DAL.ItemRepositoryTest;
 import com.Swaptem.InventoryManagement.UnitTest.DAL.UserRepositoryTest;
 import com.Swaptem.InventoryManagement.Entity.Item;

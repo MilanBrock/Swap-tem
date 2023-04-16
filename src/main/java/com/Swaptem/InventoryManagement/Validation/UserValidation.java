@@ -1,4 +1,4 @@
-package com.Swaptem.InventoryManagement.UnitTest.Validation;
+package com.Swaptem.InventoryManagement.Validation;
 
 import org.springframework.stereotype.Service;
 

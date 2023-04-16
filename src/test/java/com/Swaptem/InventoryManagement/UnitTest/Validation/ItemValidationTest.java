@@ -2,6 +2,7 @@ package com.Swaptem.InventoryManagement.UnitTest.Validation;
 
 
 import com.Swaptem.InventoryManagement.Entity.Item;
+import com.Swaptem.InventoryManagement.Validation.ItemValidation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;

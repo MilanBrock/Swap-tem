@@ -2,9 +2,9 @@ package com.Swaptem.InventoryManagement.Controller;
 
 import com.Swaptem.InventoryManagement.DTO.UserDTO;
 import com.Swaptem.InventoryManagement.Entity.User;
-import com.Swaptem.InventoryManagement.UnitTest.Service.UserMapper;
-import com.Swaptem.InventoryManagement.UnitTest.Service.UserService;
-import com.Swaptem.InventoryManagement.UnitTest.Validation.UserValidation;
+import com.Swaptem.InventoryManagement.Service.UserMapper;
+import com.Swaptem.InventoryManagement.Service.UserService;
+import com.Swaptem.InventoryManagement.Validation.UserValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -28,21 +28,23 @@ public class UserController {
 
     @PostMapping()
     public ResponseEntity<String> RegisterUser(@RequestBody User userInput){
-        boolean succes = userService.RegisterUser(userInput);
-        if(succes){
-            return new ResponseEntity<>("User added", HttpStatus.CREATED);
+        if(userValidation.UsernameIsValid(userInput.getUsername()) && userValidation.UserPasswordIsValid(userInput.getPassword()) && userValidation.UserCurrencyIsValid(userInput.getCurrency())){
+            if(userService.RegisterUser(userInput)){
+                return new ResponseEntity<>("User added", HttpStatus.CREATED);
+            }
         }
         return new ResponseEntity<>("Could not add user", HttpStatus.NOT_ACCEPTABLE);
 
     }
 
-    @GetMapping()
-    public ResponseEntity<User> GetUserById(@PathVariable int userId){
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserDTO> GetUserById(@PathVariable int userId){
         User user = userService.getUserById(userId);
         if(user != null){
-            return ResponseEntity.ok(user);
+            UserDTO userDTO = userMapper.ToUserDTO(user);
+            return ResponseEntity.ok(userDTO);
         }
-        return new ResponseEntity<>(user, HttpStatus.NOT_ACCEPTABLE);
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
     }
 
     @PutMapping()
@@ -52,23 +54,23 @@ public class UserController {
             User user = userMapper.ToUser(userDTOInput);
             succes = userService.updateUser(user);
             if(succes){
-                return new ResponseEntity<>("Item updated", HttpStatusCode.valueOf(204));
+                return new ResponseEntity<>("Item updated", HttpStatus.ACCEPTED);
             }
         }
         return new ResponseEntity<>("Item not updated", HttpStatus.NOT_ACCEPTABLE);
     }
 
 
-    @DeleteMapping()
-    public ResponseEntity<String> DeleteUser(@RequestBody UserDTO userDTOInput){
-        User user = userService.getUserById(userDTOInput.getId());
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<String> DeleteUser(@PathVariable int userId){
+        User user = userService.getUserById(userId);
         if(user != null){
-            boolean succes = userService.deleteUserById(userDTOInput.getId());
+            boolean succes = userService.deleteUserById(userId);
             if (succes){
-                return new ResponseEntity<>("User deleted", HttpStatusCode.valueOf(204));
+                return new ResponseEntity<>("User deleted", HttpStatus.ACCEPTED);
             }
         }
-        return new ResponseEntity<>("Item not deleted", HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<>("User not deleted", HttpStatus.NOT_ACCEPTABLE);
     }
 
 

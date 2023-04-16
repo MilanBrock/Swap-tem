@@ -1,4 +1,4 @@
-package com.Swaptem.InventoryManagement.UnitTest.DAL;
+package com.Swaptem.InventoryManagement.DAL;
 
 import com.Swaptem.InventoryManagement.Entity.Item;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,6 +1,6 @@
-package com.Swaptem.InventoryManagement.UnitTest.Service;
+package com.Swaptem.InventoryManagement.Service;
 
-import com.Swaptem.InventoryManagement.UnitTest.DAL.UserRepositoryInterface;
+import com.Swaptem.InventoryManagement.DAL.UserRepositoryInterface;
 import com.Swaptem.InventoryManagement.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +34,7 @@ public class UserService {
         User oldUser = new User();
         Optional<User> optionalUser = userRepository.findById(user.getUserId());
         if(optionalUser.isPresent()){
+            oldUser.setUserId(user.getUserId());
             oldUser.setUsername(user.getUsername());
             oldUser.setPassword(user.getPassword());
             oldUser.setCurrency(user.getCurrency());

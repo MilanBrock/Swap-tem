@@ -1,5 +1,6 @@
 package com.Swaptem.InventoryManagement.UnitTest.Service;
 
+import com.Swaptem.InventoryManagement.Service.UserService;
 import com.Swaptem.InventoryManagement.UnitTest.DAL.UserRepositoryTest;
 import com.Swaptem.InventoryManagement.Entity.User;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,4 @@
-package com.Swaptem.InventoryManagement.UnitTest.Service;
+package com.Swaptem.InventoryManagement.Service;
 
 import com.Swaptem.InventoryManagement.DTO.UserDTO;
 import com.Swaptem.InventoryManagement.Entity.User;
@@ -11,7 +11,7 @@ public class UserMapper {
         UserDTO userDTO = new UserDTO();
         userDTO.setUsername(userInput.getUsername());
         userDTO.setPassword(userInput.getPassword());
-        userDTO.setCurrency(userDTO.getCurrency());
+        userDTO.setCurrency(userInput.getCurrency());
         return userDTO;
     }
 
