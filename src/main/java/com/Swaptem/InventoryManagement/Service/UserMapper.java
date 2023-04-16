@@ -17,7 +17,7 @@ public class UserMapper {
 
     public User ToUser(UserDTO userDTOInput){
         User user = new User();
-        user.setId(userDTOInput.getId());
+        user.setUserId(userDTOInput.getId());
         user.setUsername(userDTOInput.getUsername());
         user.setPassword(userDTOInput.getPassword());
         user.setCurrency(userDTOInput.getCurrency());

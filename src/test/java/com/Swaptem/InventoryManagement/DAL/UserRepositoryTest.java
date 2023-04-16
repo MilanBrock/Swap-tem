@@ -1,12 +1,10 @@
 package com.Swaptem.InventoryManagement.DAL;
 
-import com.Swaptem.InventoryManagement.Entity.Item;
 import com.Swaptem.InventoryManagement.Entity.User;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.FluentQuery;
 
 import java.util.ArrayList;
@@ -39,7 +37,7 @@ public class UserRepositoryTest implements UserRepositoryInterface {
     @Override
     public <S extends User> S save(S entity) {
         users.add(entity);
-        entity.setId(users.size()+1);
+        entity.setUserId(users.size()+1);
         return entity;
     }
 
@@ -48,7 +46,7 @@ public class UserRepositoryTest implements UserRepositoryInterface {
     public Optional<User> findById(Integer integer) {
         Optional<User> userResult = Optional.empty();
         for(int i = 0; i < users.size(); i++){
-            if(users.get(i).getId() == integer){
+            if(users.get(i).getUserId() == integer){
                 userResult = Optional.ofNullable(users.get(i));
             }
         }
@@ -66,7 +64,7 @@ public class UserRepositoryTest implements UserRepositoryInterface {
     @Override
     public void deleteById(Integer integer) {
         for(int i = 0; i < users.size(); i++){
-            if(users.get(i).getId() == integer){
+            if(users.get(i).getUserId() == integer){
                 users.remove(i);
             }
         }

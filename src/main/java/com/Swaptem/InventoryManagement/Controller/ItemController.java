@@ -43,8 +43,11 @@ public class ItemController {
     @GetMapping("/{id}")
     public ResponseEntity<ItemDTO> getItemById(@PathVariable int id){
         Item item = itemService.getItemById(id);
-        ItemDTO itemDTO = new ItemDTO();
-        return ResponseEntity.ok(itemDTO);
+        if (item != null){
+            ItemDTO itemDTO = itemMapper.toItemDTO(item);
+            return ResponseEntity.ok(itemDTO);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
     }
 
     @GetMapping()
@@ -64,7 +67,7 @@ public class ItemController {
         if(itemValidation.ItemNameIsValid(item.getName()) && itemValidation.ItemDescriptionIsValid(item.getDescription())){
             succes = itemService.updateItem(item);
             if(succes){
-                return new ResponseEntity<>("Item updated", HttpStatusCode.valueOf(204));
+                return new ResponseEntity<>("Item updated", HttpStatus.ACCEPTED);
             }
         }
         return new ResponseEntity<>("Item not updated", HttpStatus.NOT_ACCEPTABLE);
@@ -74,7 +77,7 @@ public class ItemController {
     public ResponseEntity<String> deleteItem(@PathVariable int id){
         boolean succes = itemService.deleteItemById(id);
         if(succes){
-            return new ResponseEntity<>("Item deleted", HttpStatusCode.valueOf(204));
+            return new ResponseEntity<>("Item deleted", HttpStatus.ACCEPTED);
         }
         return new ResponseEntity<>("Item not deleted", HttpStatus.NOT_ACCEPTABLE);
 

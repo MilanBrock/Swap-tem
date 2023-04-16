@@ -1,8 +1,6 @@
 package com.Swaptem.InventoryManagement.Service;
 
-import com.Swaptem.InventoryManagement.DAL.ItemRepositoryTest;
 import com.Swaptem.InventoryManagement.DAL.UserRepositoryTest;
-import com.Swaptem.InventoryManagement.Entity.Item;
 import com.Swaptem.InventoryManagement.Entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -50,7 +48,7 @@ public class UserServiceTest {
 
         // Assert
         for (int i = 0; i < 2; i++){
-            assertEquals(userExpected.getId(),userResult.getId());
+            assertEquals(userExpected.getUserId(),userResult.getUserId());
             assertEquals(userExpected.getUsername(), userResult.getUsername());
             assertEquals(userExpected.getPassword(), userResult.getPassword());
             assertEquals(userExpected.getCurrency(), userResult.getCurrency());

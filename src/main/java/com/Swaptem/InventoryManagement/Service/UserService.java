@@ -20,7 +20,7 @@ public class UserService {
 
     public boolean RegisterUser(User userInput){
         User resultUser = userRepository.save(userInput);
-        if(resultUser.getId() > 0 ){
+        if(resultUser.getUserId() > 0 ){
             return true;
         }
         return false;
@@ -32,7 +32,7 @@ public class UserService {
 
     public boolean updateUser(User user){
         User oldUser = new User();
-        Optional<User> optionalUser = userRepository.findById(user.getId());
+        Optional<User> optionalUser = userRepository.findById(user.getUserId());
         if(optionalUser.isPresent()){
             oldUser.setUsername(user.getUsername());
             oldUser.setPassword(user.getPassword());
