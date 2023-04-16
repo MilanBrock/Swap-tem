@@ -16,8 +16,11 @@ jobs:
         run: mvn package        
       - name: Install Newman to run REST API test
         run: npm install -g newman
+        
       - name: Start the Springboot application
-        run: mvn spring-boot:run
+        run: nohup mvn spring-boot:run > /dev/null 2>&1 &
+      - name: Wait for the application to start
+        run: sleep 10
       - name: Run Postman REST API tests
         run: newman run src/test/InventoryManagementRESTAPItest.postman_collection.json
       
