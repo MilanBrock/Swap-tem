@@ -1,7 +1,9 @@
 package com.Swaptem.InventoryManagement.UnitTest.DAL;
 
 import com.Swaptem.InventoryManagement.DAL.ItemRepositoryInterface;
+import com.Swaptem.InventoryManagement.DAL.ItemRepositoryInterfaceCustom;
 import com.Swaptem.InventoryManagement.Entity.Item;
+import com.Swaptem.InventoryManagement.Entity.User;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class ItemRepositoryTest implements ItemRepositoryInterface {
+public class ItemRepositoryTest implements ItemRepositoryInterface, ItemRepositoryInterfaceCustom {
 
     public ArrayList<Item> items;
 
@@ -24,7 +26,8 @@ public class ItemRepositoryTest implements ItemRepositoryInterface {
 
     public void ListFill(){
         Item item1 = new Item(1,"ItemEen","ItemEenDescription");
-        Item item2 = new Item(2,"ItemTwee","ItemTweeDescription");
+        User item2Owner = new User(2, "UsernameTWEE", "UserPasswordTWEE", 300);
+        Item item2 = new Item(2,"ItemTwee","ItemTweeDescription", item2Owner);
         Item item3 = new Item(3,"ItemDrie","ItemDrieDescription");
         items.add(item1);
         items.add(item2);
@@ -63,6 +66,19 @@ public class ItemRepositoryTest implements ItemRepositoryInterface {
                 items.remove(i);
             }
         }
+    }
+
+    @Override
+    public List<Item> findAllByOwner_UserId(int userId){
+        List<Item> itemResult = new ArrayList<>();
+        for(int i = 0; i < items.size(); i++){
+            if(items.get(i).getOwner() != null){
+                if(items.get(i).getOwner().getUserId() == userId){
+                    itemResult.add(items.get(i));
+                }
+            }
+        }
+        return itemResult;
     }
 
 

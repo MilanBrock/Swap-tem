@@ -1,20 +1,23 @@
 package com.Swaptem.InventoryManagement.Service;
 
 import com.Swaptem.InventoryManagement.DAL.ItemRepositoryInterface;
+import com.Swaptem.InventoryManagement.DAL.ItemRepositoryInterfaceCustom;
 import com.Swaptem.InventoryManagement.Entity.Item;
+import com.Swaptem.InventoryManagement.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ItemService {
 
-    final ItemRepositoryInterface itemRepository;
+    final ItemRepositoryInterfaceCustom itemRepository;
 
     @Autowired
-    public ItemService(ItemRepositoryInterface itemRepositoryInput){
+    public ItemService(ItemRepositoryInterfaceCustom itemRepositoryInput){
         this.itemRepository = itemRepositoryInput;
     }
 
@@ -58,6 +61,11 @@ public class ItemService {
         }
 
         return succes;
+    }
+
+    public List<Item> getItemsByUserId(int userId){
+        List<Item> items = itemRepository.findAllByOwner_UserId(userId);
+        return items;
     }
 
 

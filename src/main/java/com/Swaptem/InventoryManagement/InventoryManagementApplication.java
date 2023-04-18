@@ -25,10 +25,8 @@ public class InventoryManagementApplication {
 			User userMilan = new User(1,"MilanBrock","Secret",650);
 			userRepositoryInterface.save(userMilan);
 
-			Item itemPenguino = new Item(1, "Penguino","Lives in the cold.", userMilan);
+			Item itemPenguino = new Item(2, "Penguino","Lives in the cold.", userMilan);
 			itemRepositoryInterface.save(itemPenguino);
-
-
 		};
 	}
 }

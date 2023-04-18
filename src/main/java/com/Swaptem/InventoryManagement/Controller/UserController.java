@@ -72,9 +72,5 @@ public class UserController {
         }
         return new ResponseEntity<>("User not deleted", HttpStatus.NOT_ACCEPTABLE);
     }
-
-
-
-
-
+    
 }

@@ -38,14 +38,16 @@ public class InventoryServiceTest {
         // Arrange
         Item item = new Item(1,"ItemEen","ItemEenDescription");
         User user = new User(404, "Username404", "UserPassword404", 500);
+        int itemId = 1;
+        int userId = 404;
         // User 404 does not exist
 
         boolean expectedResult = false;
         // Act
-        boolean result = inventoryService.AddItemToUser(user, item);
+        boolean result = inventoryService.AddItemToUser(userId, itemId);
 
         // Assert
-        //assertEquals(expectedResult, result);
+        assertEquals(expectedResult, result);
     }
 
     @Test
@@ -53,29 +55,36 @@ public class InventoryServiceTest {
         // Arrange
         Item item = new Item(404,"ItemVIERNULVIER","ItemVIERNULVIERDescription");
         User user = new User(1, "UsernameEEN", "UserPasswordEEN", 500);
+        int itemId = 404;
+        int userId = 1;
         // Item 404 does not exist
 
         boolean expectedResult = false;
         // Act
-        boolean result = inventoryService.AddItemToUser(user, item);
+        boolean result = inventoryService.AddItemToUser(userId, itemId);
 
         // Assert
-        //assertEquals(expectedResult, result);
+        assertEquals(expectedResult, result);
     }
 
     @Test
     public void AddItemTest_ItemNotAvailable_Fail(){
         // Arrange
-        Item item = new Item(2,"ItemVIERTWEEVIER","ItemVIERTWEEVIERDescription");
         User user = new User(1, "UsernameEEN", "UserPasswordEEN", 500);
+        User user2 = new User(2, "UsernameTWEE", "UserPasswordTWEE", 300);
+        Item item = new Item(2,"ItemVIERTWEEVIER","ItemVIERTWEEVIERDescription", user2);
+
+        int userId = 1;
+        int itemId = 2;
+
         // Item 2 already belongs to another user
 
         boolean expectedResult = false;
         // Act
-        boolean result = inventoryService.AddItemToUser(user, item);
+        boolean result = inventoryService.AddItemToUser(userId, itemId);
 
         // Assert
-        //assertEquals(expectedResult, result);
+        assertEquals(expectedResult, result);
     }
 
 
@@ -84,13 +93,15 @@ public class InventoryServiceTest {
         // Arrange
         Item item = new Item(3,"ItemEen","ItemEenDescription");
         User user = new User(1, "UsernameEEN", "UserPasswordEEN", 500);
+        int itemId = 3;
+        int userId = 1;
 
         boolean expectedResult = true;
         // Act
-        boolean result = inventoryService.AddItemToUser(user, item);
+        boolean result = inventoryService.AddItemToUser(userId, itemId);
 
         // Assert
-        //assertEquals(expectedResult, result);
+        assertEquals(expectedResult, result);
     }
 
 
@@ -99,14 +110,17 @@ public class InventoryServiceTest {
         // Arrange
         Item item = new Item(1,"ItemEen","ItemEenDescription");
         User user = new User(404, "Username404", "UserPassword404", 500);
+
+        int itemId = 1;
+        int userId = 404;
         // User 404 does not exist
 
         boolean expectedResult = false;
         // Act
-        boolean result = inventoryService.RemoveItemFromUser(user, item);
+        boolean result = inventoryService.RemoveItemFromUser(userId, itemId);
 
         // Assert
-        //assertEquals(expectedResult, result);
+        assertEquals(expectedResult, result);
     }
 
     @Test
@@ -114,14 +128,16 @@ public class InventoryServiceTest {
         // Arrange
         Item item = new Item(5,"ItemFIVE","ItemFIVEDescription");
         User user = new User(1, "UsernameEEN", "UserPasswordEEN", 500);
+        int itemId = 5;
+        int userId = 1;
         // User does not have this item
 
         boolean expectedResult = false;
         // Act
-        boolean result = inventoryService.RemoveItemFromUser(user, item);
+        boolean result = inventoryService.RemoveItemFromUser(userId, itemId);
 
         // Assert
-        //assertEquals(expectedResult, result);
+        assertEquals(expectedResult, result);
     }
 
 
@@ -130,29 +146,34 @@ public class InventoryServiceTest {
         // Arrange
         Item item = new Item(404,"ItemVIERNULVIER","ItemVIERNULVIERDescription");
         User user = new User(1, "UsernameEEN", "UserPasswordEEN", 500);
+        int itemId = 404;
+        int userId = 1;
         // Item 404 does not exist
 
         boolean expectedResult = false;
         // Act
-        boolean result = inventoryService.RemoveItemFromUser(user, item);
+        boolean result = inventoryService.RemoveItemFromUser(userId, itemId);
 
         // Assert
-        //assertEquals(expectedResult, result);
+        assertEquals(expectedResult, result);
     }
 
     @Test
     public void RemoveItemTest_Pass(){
         // Arrange
-        Item item = new Item(1,"ItemEen","ItemEenDescription");
         User user = new User(1, "UsernameEEN", "UserPasswordEEN", 500);
+        Item item = new Item(1,"ItemEen","ItemEenDescription", user);
 
+        int userId = 2;
+        int itemId = 2;
 
         boolean expectedResult = true;
+
         // Act
-        boolean result = inventoryService.RemoveItemFromUser(user, item);
+        boolean result = inventoryService.RemoveItemFromUser(userId, itemId);
 
         // Assert
-        //assertEquals(expectedResult, result);
+        assertEquals(expectedResult, result);
     }
 
     @Test
@@ -163,23 +184,23 @@ public class InventoryServiceTest {
 
         int expectedResult = 0;
         // Act
-        List<Item> itemsResult = inventoryService.GetItemsByUsedId(userId);
+        List<Item> itemsResult = inventoryService.GetItemsByUserId(userId);
 
         // Assert
-        //assertEquals(expectedResult, itemsResult.size());
+        assertEquals(expectedResult, itemsResult.size());
     }
 
     @Test
     public void GetItemsByUserId_Pass(){
         // Arrange
-        int userId = 1;
+        int userId = 2;
 
         int expectedResult = 1;
         // Act
-        List<Item> itemsResult = inventoryService.GetItemsByUsedId(userId);
+        List<Item> itemsResult = inventoryService.GetItemsByUserId(userId);
 
         // Assert
-        //assertEquals(expectedResult, itemsResult.size());
+        assertEquals(expectedResult, itemsResult.size());
     }
 
 
