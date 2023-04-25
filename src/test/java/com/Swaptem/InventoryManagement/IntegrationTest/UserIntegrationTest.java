@@ -1,5 +1,6 @@
 package com.Swaptem.InventoryManagement.IntegrationTest;
 
+import com.Swaptem.InventoryManagement.DAL.UserRepositoryCustom;
 import com.Swaptem.InventoryManagement.DAL.UserRepositoryInterface;
 import com.Swaptem.InventoryManagement.Entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,8 +35,18 @@ public class UserIntegrationTest {
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
-    private UserRepositoryInterface userRepository;
+    private UserRepositoryCustom userRepository;
 
+    public static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    // Database aanvullen
 
     @Test
     void registerUser_IntegrationTest(){
@@ -70,13 +81,86 @@ public class UserIntegrationTest {
     }
 
 
+    @Test
+    void GetUserById_IntegrationTest(){
+        // Arrange
+        String expectedUsername = "MilanBrock";
+        String expectedPassword = "Secret";
+        int expectedCurrency = 650;
+        int expectedUserId = 1;
 
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        // Act
+        try{
+            mockMvc.perform(MockMvcRequestBuilders
+                            .get("/users/{userId}", expectedUserId)
+                            .accept(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isOk())
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.username").value(expectedUsername))
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.password").value(expectedPassword))
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.currency").value(expectedCurrency));
+        } catch(Exception ex){
+
         }
+
+
+    }
+
+
+
+    @Test
+    void UpdateUser_IntegrationTest(){
+        // Arrange
+        String expectedUsername = "MilanBrockTest";
+        String expectedPassword = "SecretTest";
+        int expectedCurrency = 850;
+        int expectedUserId = 1;
+
+        // Act
+        try{
+            mockMvc.perform( MockMvcRequestBuilders
+                            .put("/users" )
+                            .content(asJsonString(new User(expectedUserId, expectedUsername,expectedPassword,expectedCurrency)))
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .accept(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isAccepted());
+        } catch (Exception ex){
+
+        }
+
+        User userResult = userRepository.findById(expectedUserId).orElse(null);
+
+        // Assert
+        if(userResult != null){
+            assertEquals(expectedUserId, userResult.getUserId());
+            assertEquals(expectedUsername, userResult.getUsername());
+            assertEquals(expectedPassword, userResult.getPassword());
+            assertEquals(expectedCurrency, userResult.getCurrency());
+        }
+    }
+
+
+    @Test
+    void DeleteUser_IntegrationTest(){
+        // Arrange
+        int expectedUserId = 1;
+        boolean expectedActive = false;
+
+        // Act
+        try{
+            mockMvc.perform( MockMvcRequestBuilders.delete("/users/{userId}", expectedUserId) )
+                    .andExpect(status().isAccepted());
+        } catch( Exception ex){
+
+        }
+
+
+        User userResult = userRepository.findById(expectedUserId).orElse(null);
+        // Assert
+        if(userResult != null){
+            assertEquals(expectedActive, userResult.isActive());
+        }
+
+
     }
 
 }

@@ -61,6 +61,4 @@ public class InventoryController {
 
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
     }
-
-
 }

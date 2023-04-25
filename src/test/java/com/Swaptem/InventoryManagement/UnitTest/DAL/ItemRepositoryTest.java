@@ -1,7 +1,7 @@
 package com.Swaptem.InventoryManagement.UnitTest.DAL;
 
 import com.Swaptem.InventoryManagement.DAL.ItemRepositoryInterface;
-import com.Swaptem.InventoryManagement.DAL.ItemRepositoryInterfaceCustom;
+import com.Swaptem.InventoryManagement.DAL.ItemRepositoryCustom;
 import com.Swaptem.InventoryManagement.Entity.Item;
 import com.Swaptem.InventoryManagement.Entity.User;
 import org.springframework.data.domain.Example;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class ItemRepositoryTest implements ItemRepositoryInterface, ItemRepositoryInterfaceCustom {
+public class ItemRepositoryTest implements ItemRepositoryInterface, ItemRepositoryCustom {
 
     public ArrayList<Item> items;
 
@@ -25,10 +25,10 @@ public class ItemRepositoryTest implements ItemRepositoryInterface, ItemReposito
     }
 
     public void ListFill(){
-        Item item1 = new Item(1,"ItemEen","ItemEenDescription");
-        User item2Owner = new User(2, "UsernameTWEE", "UserPasswordTWEE", 300);
-        Item item2 = new Item(2,"ItemTwee","ItemTweeDescription", item2Owner);
-        Item item3 = new Item(3,"ItemDrie","ItemDrieDescription");
+        Item item1 = new Item(1,"ItemEen","ItemEenDescription", true);
+        User item2Owner = new User(2, "UsernameTWEE", "UserPasswordTWEE", 300, true);
+        Item item2 = new Item(2,"ItemTwee","ItemTweeDescription", item2Owner, true);
+        Item item3 = new Item(3,"ItemDrie","ItemDrieDescription", true);
         items.add(item1);
         items.add(item2);
         items.add(item3);
@@ -39,7 +39,7 @@ public class ItemRepositoryTest implements ItemRepositoryInterface, ItemReposito
     @Override
     public <S extends Item> S save(S entity) {
         items.add(entity);
-        entity.setId(items.size()+1);
+        entity.setItemId(items.size()+1);
         return entity;
     }
 
@@ -47,7 +47,7 @@ public class ItemRepositoryTest implements ItemRepositoryInterface, ItemReposito
     public Optional<Item> findById(Integer integer) {
         Optional<Item> itemResult = Optional.empty();
         for(int i = 0; i < items.size(); i++){
-            if(items.get(i).getId() == integer){
+            if(items.get(i).getItemId() == integer){
                 itemResult = Optional.ofNullable(items.get(i));
             }
         }
@@ -62,23 +62,40 @@ public class ItemRepositoryTest implements ItemRepositoryInterface, ItemReposito
     @Override
     public void deleteById(Integer integer) {
         for(int i = 0; i < items.size(); i++){
-            if(items.get(i).getId() == integer){
+            if(items.get(i).getItemId() == integer){
                 items.remove(i);
             }
         }
     }
 
+
     @Override
-    public List<Item> findAllByOwner_UserId(int userId){
+    public List<Item> findAllByOwner_UserIdAndActive(int userId, boolean active) {
         List<Item> itemResult = new ArrayList<>();
         for(int i = 0; i < items.size(); i++){
-            if(items.get(i).getOwner() != null){
+            if(items.get(i).getOwner() != null && items.get(i).isActive()){
                 if(items.get(i).getOwner().getUserId() == userId){
                     itemResult.add(items.get(i));
                 }
             }
         }
         return itemResult;
+    }
+
+    @Override
+    public Optional<Item> findByItemIdAndActive(int itemId, boolean active) {
+        Optional<Item> itemResult = Optional.empty();
+        for(int i = 0; i < items.size(); i++){
+            if(items.get(i).getItemId() == itemId && items.get(i).isActive()){
+                itemResult = Optional.ofNullable(items.get(i));
+            }
+        }
+        return itemResult;
+    }
+
+    @Override
+    public Optional<List<Item>> findAllByActive(boolean active) {
+        return Optional.empty();
     }
 
 

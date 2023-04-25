@@ -22,10 +22,10 @@ public class InventoryManagementApplication {
 	@Bean
 	CommandLineRunner run(UserRepositoryInterface userRepositoryInterface, ItemRepositoryInterface itemRepositoryInterface){
 		return args -> {
-			User userMilan = new User(1,"MilanBrock","Secret",650);
+			User userMilan = new User(1,"MilanBrock","Secret",650, true);
 			userRepositoryInterface.save(userMilan);
 
-			Item itemPenguino = new Item(2, "Penguino","Lives in the cold.", userMilan);
+			Item itemPenguino = new Item(2, "Penguino","Lives in the cold.", userMilan, true);
 			itemRepositoryInterface.save(itemPenguino);
 		};
 	}

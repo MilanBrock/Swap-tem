@@ -17,6 +17,7 @@ public class User {
     private String username;
     private String password;
     private int currency;
+    private boolean active;
 
 
     public User (String usernameInput, String passwordInput, int currencyInput){
@@ -24,4 +25,20 @@ public class User {
         this.password = passwordInput;
         this.currency = currencyInput;
     }
+
+    public User (int userIdInput, String usernameInput, String passwordInput, int currencyInput){
+        this.userId = userIdInput;
+        this.username = usernameInput;
+        this.password = passwordInput;
+        this.currency = currencyInput;
+    }
+
+    public User (String usernameInput, String passwordInput, int currencyInput, boolean activeInput){
+        this.username = usernameInput;
+        this.password = passwordInput;
+        this.currency = currencyInput;
+        this.active = activeInput;
+    }
+
+
 }

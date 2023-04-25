@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,13 +12,13 @@ import java.time.LocalDateTime;
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int itemId;
     private String name;
     private String description;
-
     @ManyToOne
     @JoinColumn(name = "userID")
     private User owner;
+    private boolean active;
 
 
     public Item(String nameInput, String descriptionInput){
@@ -29,9 +27,16 @@ public class Item {
     }
 
     public Item(int idInput, String nameInput, String descriptionInput){
-        this.id = idInput;
+        this.itemId = idInput;
         this.name = nameInput;
         this.description = descriptionInput;
+    }
+
+    public Item(int idInput, String nameInput, String descriptionInput, boolean activeInput){
+        this.itemId = idInput;
+        this.name = nameInput;
+        this.description = descriptionInput;
+        this.active = activeInput;
     }
 
 }

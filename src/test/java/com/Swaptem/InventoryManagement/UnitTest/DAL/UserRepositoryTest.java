@@ -1,5 +1,6 @@
 package com.Swaptem.InventoryManagement.UnitTest.DAL;
 
+import com.Swaptem.InventoryManagement.DAL.UserRepositoryCustom;
 import com.Swaptem.InventoryManagement.DAL.UserRepositoryInterface;
 import com.Swaptem.InventoryManagement.Entity.User;
 import org.springframework.data.domain.Example;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class UserRepositoryTest implements UserRepositoryInterface {
+public class UserRepositoryTest implements UserRepositoryInterface, UserRepositoryCustom {
 
     public ArrayList<User> users;
 
@@ -23,9 +24,9 @@ public class UserRepositoryTest implements UserRepositoryInterface {
     }
 
     public void ListFill(){
-        User user1 = new User(1, "UsernameEEN", "UserPasswordEEN", 500);
-        User user2 = new User(2, "UsernameTWEE", "UserPasswordTWEE", 300);
-        User user3 = new User(3, "UsernameDRIE", "UserPasswordDRIE", 865);
+        User user1 = new User(1, "UsernameEEN", "UserPasswordEEN", 500, true);
+        User user2 = new User(2, "UsernameTWEE", "UserPasswordTWEE", 300, true);
+        User user3 = new User(3, "UsernameDRIE", "UserPasswordDRIE", 865, true);
         users.add(user1);
         users.add(user2);
         users.add(user3);
@@ -70,6 +71,12 @@ public class UserRepositoryTest implements UserRepositoryInterface {
             }
         }
     }
+
+    @Override
+    public Optional<User> findByUserIdAndActive(int userId, boolean active) {
+        return Optional.empty();
+    }
+
 
 
 
@@ -210,4 +217,6 @@ public class UserRepositoryTest implements UserRepositoryInterface {
     public Page<User> findAll(Pageable pageable) {
         return null;
     }
+
+
 }

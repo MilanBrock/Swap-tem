@@ -1,5 +1,6 @@
 package com.Swaptem.InventoryManagement.Service;
 
+import com.Swaptem.InventoryManagement.DAL.UserRepositoryCustom;
 import com.Swaptem.InventoryManagement.DAL.UserRepositoryInterface;
 import com.Swaptem.InventoryManagement.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +11,16 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    final UserRepositoryInterface userRepository;
+    final UserRepositoryCustom userRepository;
 
     @Autowired
-    public UserService(UserRepositoryInterface userRepositoryInput){
+    public UserService(UserRepositoryCustom userRepositoryInput){
         this.userRepository = userRepositoryInput;
     }
 
 
     public boolean RegisterUser(User userInput){
+        userInput.setActive(true);
         User resultUser = userRepository.save(userInput);
         if(resultUser.getUserId() > 0 ){
             return true;
@@ -27,12 +29,12 @@ public class UserService {
     }
 
     public User getUserById(int userId){
-        return userRepository.findById(userId).orElse(null);
+        return userRepository.findByUserIdAndActive(userId, true).orElse(null);
     }
 
     public boolean updateUser(User user){
         User oldUser = new User();
-        Optional<User> optionalUser = userRepository.findById(user.getUserId());
+        Optional<User> optionalUser = userRepository.findByUserIdAndActive(user.getUserId(), true);
         if(optionalUser.isPresent()){
             oldUser.setUserId(user.getUserId());
             oldUser.setUsername(user.getUsername());
@@ -48,10 +50,11 @@ public class UserService {
 
     public boolean deleteUserById(int userId){
         boolean succes = false;
-        User user = userRepository.findById(userId).orElse(null);
+        User user = userRepository.findByUserIdAndActive(userId, true).orElse(null);
 
         if(user != null){
-            userRepository.deleteById(userId);
+            user.setActive(false);
+            userRepository.save(user);
             succes = true;
         }
         return succes;

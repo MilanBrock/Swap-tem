@@ -55,7 +55,7 @@ public class ItemServiceTest {
 
         // Assert
         for (int i = 0; i < 2; i++){
-            assertEquals(itemExpected.getId(),itemResult.getId());
+            assertEquals(itemExpected.getItemId(),itemResult.getItemId());
             assertEquals(itemExpected.getName(), itemResult.getName());
             assertEquals(itemExpected.getDescription(), itemResult.getDescription());
         }
@@ -92,7 +92,7 @@ public class ItemServiceTest {
 
         // Assert
         for(int i = 0; i < items.size(); i++){
-            assertEquals(items.get(i).getId(),resultItems.get(i).getId());
+            assertEquals(items.get(i).getItemId(),resultItems.get(i).getItemId());
             assertEquals(items.get(i).getName(), resultItems.get(i).getName());
             assertEquals(items.get(i).getDescription(), resultItems.get(i).getDescription());
         }

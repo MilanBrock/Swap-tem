@@ -54,10 +54,10 @@ public class UserController {
             User user = userMapper.ToUser(userDTOInput);
             succes = userService.updateUser(user);
             if(succes){
-                return new ResponseEntity<>("Item updated", HttpStatus.ACCEPTED);
+                return new ResponseEntity<>("User updated", HttpStatus.ACCEPTED);
             }
         }
-        return new ResponseEntity<>("Item not updated", HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<>("User not updated", HttpStatus.NOT_ACCEPTABLE);
     }
 
 
