@@ -74,7 +74,13 @@ public class UserRepositoryTest implements UserRepositoryInterface, UserReposito
 
     @Override
     public Optional<User> findByUserIdAndActive(int userId, boolean active) {
-        return Optional.empty();
+        Optional<User> userResult = Optional.empty();
+        for(int i = 0; i < users.size(); i++){
+            if(users.get(i).getUserId() == userId && users.get(i).isActive()){
+                userResult = Optional.ofNullable(users.get(i));
+            }
+        }
+        return userResult;
     }
 
 

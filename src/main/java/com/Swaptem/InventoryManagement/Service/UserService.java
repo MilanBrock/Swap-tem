@@ -32,15 +32,19 @@ public class UserService {
         return userRepository.findByUserIdAndActive(userId, true).orElse(null);
     }
 
-    public boolean updateUser(User user){
-        User oldUser = new User();
-        Optional<User> optionalUser = userRepository.findByUserIdAndActive(user.getUserId(), true);
-        if(optionalUser.isPresent()){
-            oldUser.setUserId(user.getUserId());
-            oldUser.setUsername(user.getUsername());
-            oldUser.setPassword(user.getPassword());
-            oldUser.setCurrency(user.getCurrency());
-            userRepository.save(oldUser);
+    public boolean updateUser(User userInput){
+        User user = userRepository.findByUserIdAndActive(userInput.getUserId(), true).orElse(null);
+        if(user != null){
+            if(userInput.getUsername() != null){
+                user.setUsername(userInput.getUsername());
+            }
+            if(userInput.getPassword() != null){
+                user.setPassword(userInput.getPassword());
+            }
+            if(userInput.getCurrency() != 0){
+                user.setCurrency(userInput.getCurrency());
+            }
+            userRepository.save(user);
         } else {
             return false;
         }

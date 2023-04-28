@@ -95,7 +95,15 @@ public class ItemRepositoryTest implements ItemRepositoryInterface, ItemReposito
 
     @Override
     public Optional<List<Item>> findAllByActive(boolean active) {
-        return Optional.empty();
+        List<Item> itemsResult = new ArrayList<>();
+
+        Optional<Item> itemResult = Optional.empty();
+        for(int i = 0; i < items.size(); i++){
+            if(items.get(i).isActive()){
+                itemsResult.add(items.get(i));
+            }
+        }
+        return Optional.ofNullable(itemsResult);
     }
 
 

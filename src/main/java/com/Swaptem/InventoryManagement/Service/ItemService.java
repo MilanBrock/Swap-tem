@@ -35,14 +35,12 @@ public class ItemService {
         return itemRepository.findAllByActive(true).orElse(null);
     }
 
-    public boolean updateItem (Item item){
-        Item oldItem = new Item();
-        Optional<Item> optionalItem = itemRepository.findByItemIdAndActive(item.getItemId(), true);
-        if(optionalItem.isPresent()){
-            oldItem = optionalItem.get();
-            oldItem.setName(item.getName());
-            oldItem.setDescription(item.getDescription());
-            itemRepository.save(oldItem);
+    public boolean updateItem (Item itemInput){
+        Item item = itemRepository.findByItemIdAndActive(itemInput.getItemId(), true).orElse(null);
+        if(item != null){
+            item.setName(itemInput.getName());
+            item.setDescription(itemInput.getDescription());
+            itemRepository.save(item);
         } else {
             return false;
         }
@@ -51,15 +49,13 @@ public class ItemService {
 
     public boolean deleteItemById(int id){
         boolean succes = false;
-        Optional<Item> optionalItem = itemRepository.findByItemIdAndActive(id, true);
+        Item item = itemRepository.findByItemIdAndActive(id, true).orElse(null);
 
-        if(optionalItem.isPresent()){
-            Item item = optionalItem.get();
+        if(item != null){
             item.setActive(false);
             itemRepository.save(item);
             succes = true;
         }
-
         return succes;
     }
 

@@ -1,7 +1,6 @@
 package com.Swaptem.InventoryManagement.DAL;
 
 import com.Swaptem.InventoryManagement.Entity.Item;
-import com.Swaptem.InventoryManagement.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

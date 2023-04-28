@@ -20,9 +20,7 @@
 									"    pm.response.to.have.status(201);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", () => {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -64,10 +62,7 @@
 									"pm.test(\"Invalid input (406) to item POST test\", function () {\r",
 									"    pm.response.to.have.status(406);\r",
 									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 200ms\", () => {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -111,10 +106,7 @@
 									"  pm.expect(responseJson.name).to.eql(\"Penguino\");\r",
 									"  pm.expect(responseJson.description).to.eql(\"Lives in the cold.\");\r",
 									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 200ms\", () => {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -148,10 +140,7 @@
 									"pm.test(\"Non existent item (406) on item GET test\", function () {\r",
 									"    pm.response.to.have.status(406);\r",
 									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 200ms\", () => {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -182,9 +171,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Response time is less than 200ms\", () => {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -217,10 +204,7 @@
 									"pm.test(\"Succesfull item update (202) to item PUT test\", function () {\r",
 									"    pm.response.to.have.status(202);\r",
 									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 200ms\", () => {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -231,7 +215,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":1,\r\n    \"name\":\"Item1NEW\",\r\n    \"description\":\"ItemDesc1\"\r\n}",
+							"raw": "{\r\n    \"itemId\":1,\r\n    \"name\":\"Item1NEW\",\r\n    \"description\":\"ItemDesc1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -263,9 +247,7 @@
 									"    pm.response.to.have.status(406);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", () => {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -308,9 +290,7 @@
 									"    pm.response.to.have.status(406);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", () => {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -352,10 +332,7 @@
 									"pm.test(\"Succesfull item deletion (202) to item DELETE test\", function () {\r",
 									"    pm.response.to.have.status(202);\r",
 									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 200ms\", () => {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -389,10 +366,7 @@
 									"pm.test(\"Non existent item (406) on item GET test\", function () {\r",
 									"    pm.response.to.have.status(406);\r",
 									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 200ms\", () => {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -432,9 +406,7 @@
 									"    pm.response.to.have.status(201);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 200ms\", () => {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -476,10 +448,7 @@
 									"pm.test(\"Invalid input (406) to user POST test\", function () {\r",
 									"    pm.response.to.have.status(406);\r",
 									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 200ms\", () => {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -524,10 +493,7 @@
 									"  pm.expect(responseJson.password).to.eql(\"Secret\");\r",
 									"  pm.expect(responseJson.currency).to.eql(650);\r",
 									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 200ms\", () => {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -561,10 +527,7 @@
 									"pm.test(\"Non existent user (406) on user GET test\", function () {\r",
 									"    pm.response.to.have.status(406);\r",
 									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 200ms\", () => {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -598,10 +561,7 @@
 									"pm.test(\"Succesfull user update (202) to user PUT test\", function () {\r",
 									"    pm.response.to.have.status(202);\r",
 									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 200ms\", () => {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -612,7 +572,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":1,\r\n    \"username\":\"MilanBrockNew\",\r\n    \"password\":\"NewSecret\",\r\n    \"currency\":999\r\n}",
+							"raw": "{\r\n    \"userId\":1,\r\n    \"username\":\"MilanBrockNew\",\r\n    \"password\":\"NewSecret\",\r\n    \"currency\":999\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -642,10 +602,6 @@
 								"exec": [
 									"pm.test(\"Invalid username input (406) to user PUT test\", function () {\r",
 									"    pm.response.to.have.status(406);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 200ms\", () => {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -688,10 +644,7 @@
 									"pm.test(\"Invalid id input (406) to user PUT test\", function () {\r",
 									"    pm.response.to.have.status(406);\r",
 									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 200ms\", () => {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -730,12 +683,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Non existent user (406) on user GET test\", function () {\r",
+									"pm.test(\"Non existent user (406) on user DELETE test\", function () {\r",
 									"    pm.response.to.have.status(406);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Response time is less than 200ms\", () => {\r",
-									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -759,8 +708,303 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delete User {3} [Valid]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"User deletion accepted (202) on user DELETE test\", function () {\r",
+									"    pm.response.to.have.status(202);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/users/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"3"
+							]
+						}
+					},
+					"response": []
 				}
 			]
+		},
+		{
+			"name": "Inventory Controller",
+			"item": [
+				{
+					"name": "add item {3} to user {1} [Valid]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Item adding accepted (202) on inventory add test\", function () {\r",
+									"    pm.response.to.have.status(202);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":1,\r\n    \"itemId\":3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/inventory/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inventory",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add item {5} to user {2} [Invalid]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Items belongs to other user (406) on inventory add test\", function () {\r",
+									"    pm.response.to.have.status(406);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":2,\r\n    \"itemId\":5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/inventory/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inventory",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove item {4} from user {1} [Valid]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"item removal accepted (202) on inventory remove test\", function () {\r",
+									"    pm.response.to.have.status(202);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":1,\r\n    \"itemId\":4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/inventory/remove",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inventory",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove item {6} from user {1} [Invalid]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"User does not own item (406) on inventory remove test\", function () {\r",
+									"    pm.response.to.have.status(406);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":1,\r\n    \"itemId\":6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/inventory/remove",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inventory",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get inventory from user {1} [Valid]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"inventory accepted (200) on inventory get test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/inventory/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inventory",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get inventory from user {-1} [Invalid]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Non existent user (406) on inventory get test\", function () {\r",
+									"    pm.response.to.have.status(406);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/inventory/-1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"inventory",
+								"-1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Response time is less than 350ms\", () => {",
+					"  pm.expect(pm.response.responseTime).to.be.below(350);",
+					"});",
+					""
+				]
+			}
 		}
 	]
 }
