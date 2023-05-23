@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.List;
 
@@ -109,12 +110,22 @@ public class InventoryIntegrationTest {
     @Test
     void GetInventory_IntegrationTest(){
         // Arrange
+        int userId = 2;
+        String expectedItemName = "Minesweeper";
+        String expectedItemDescription = "Relic of a historic figure";
 
+        // Act & Assert
+        try{
+            mockMvc.perform( MockMvcRequestBuilders
+                            .get("/inventory/{userId}", userId )
+                            .accept(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isOk())
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.[0].name").value(expectedItemName))
+                    .andExpect(MockMvcResultMatchers.jsonPath("$[0].description").value(expectedItemDescription));
+        } catch (Exception ex){
 
-        // Act
+        }
 
-
-        // Assert
     }
 
 }

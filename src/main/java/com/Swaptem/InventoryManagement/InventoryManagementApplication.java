@@ -44,6 +44,9 @@ public class InventoryManagementApplication {
 
 			Item itemLock = new Item(5, "Steel Lock","Securely in place", userMilan, true);
 			itemRepositoryInterface.save(itemLock);
+
+			Item itemSweeper = new Item(5, "Minesweeper","Relic of a historic figure", userSwapGod, true);
+			itemRepositoryInterface.save(itemSweeper);
 		};
 	}
 }
