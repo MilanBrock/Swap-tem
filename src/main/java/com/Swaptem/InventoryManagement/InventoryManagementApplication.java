@@ -18,7 +18,6 @@ public class InventoryManagementApplication {
 
 
 
-
 	@Bean
 	CommandLineRunner run(UserRepositoryInterface userRepositoryInterface, ItemRepositoryInterface itemRepositoryInterface){
 		return args -> {
