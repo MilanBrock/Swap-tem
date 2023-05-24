@@ -1,5 +1,6 @@
 package com.Swaptem.InventoryManagement.Controller;
 
+import com.Swaptem.InventoryManagement.DTO.ItemCollectionDTO;
 import com.Swaptem.InventoryManagement.DTO.ItemDTO;
 import com.Swaptem.InventoryManagement.Service.ItemMapper;
 import com.Swaptem.InventoryManagement.Service.ItemService;
@@ -47,6 +48,22 @@ public class ItemController {
             return ResponseEntity.ok(itemDTO);
         }
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
+    }
+
+    @PostMapping("/itemCollection")
+    public ResponseEntity<ItemCollectionDTO> getItemsByIds(@RequestBody ItemCollectionDTO itemIds){
+        ItemCollectionDTO itemCollectionDTO = new ItemCollectionDTO();
+        ItemDTO[] itemDTOS = new ItemDTO[itemIds.itemIds.length];
+        for(int i = 0; i < itemIds.itemIds.length; i++){
+            Item item = itemService.getItemById(itemIds.itemIds[i]);
+            if (item != null){
+                ItemDTO itemDTO = itemMapper.toItemDTO(item);
+                itemDTOS[i] = itemDTO;
+            }
+        }
+        itemCollectionDTO.items = itemDTOS;
+
+        return ResponseEntity.ok(itemCollectionDTO);
     }
 
     @GetMapping()

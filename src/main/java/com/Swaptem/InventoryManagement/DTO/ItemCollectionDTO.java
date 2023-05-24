@@ -5,8 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ItemDTO {
-    public int id;
-    public String name;
-    public String description;
+public class ItemCollectionDTO {
+    public int [] itemIds;
+    public ItemDTO[] items;
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 public class ItemMapper {
     public ItemDTO toItemDTO(Item item){
         ItemDTO itemDTO = new ItemDTO();
+        itemDTO.setId(item.getItemId());
         itemDTO.setName(item.getName());
         itemDTO.setDescription(item.getDescription());
         return itemDTO;
