@@ -33,7 +33,7 @@ public class UserServiceTest {
         boolean expectedResult = true;
 
         // Act
-        boolean result = userService.RegisterUser(registerUser);
+        boolean result = userService.registerUser(registerUser);
 
         // Assert
         assertEquals(expectedResult, result);

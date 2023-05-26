@@ -83,7 +83,15 @@ public class UserRepositoryTest implements UserRepositoryInterface, UserReposito
         return userResult;
     }
 
+    @Override
+    public Optional<User> findUserByUsernameAndPassword(String username, String password) {
+        return Optional.empty();
+    }
 
+    @Override
+    public Optional<User> findUserByUsername(String username) {
+        return Optional.empty();
+    }
 
 
     // Unused methods

@@ -7,7 +7,6 @@ import com.Swaptem.InventoryManagement.Service.UserService;
 import com.Swaptem.InventoryManagement.Validation.UserValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +29,7 @@ public class UserController {
     @PostMapping()
     public ResponseEntity<String> RegisterUser(@RequestBody User userInput){
         if(userValidation.UsernameIsValid(userInput.getUsername()) && userValidation.UserPasswordIsValid(userInput.getPassword()) && userValidation.UserCurrencyIsValid(userInput.getCurrency())){
-            if(userService.RegisterUser(userInput)){
+            if(userService.registerUser(userInput)){
                 return new ResponseEntity<>("User added", HttpStatus.CREATED);
             }
         }

@@ -1,12 +1,10 @@
 package com.Swaptem.InventoryManagement.Service;
 
 import com.Swaptem.InventoryManagement.DAL.UserRepositoryCustom;
-import com.Swaptem.InventoryManagement.DAL.UserRepositoryInterface;
+import com.Swaptem.InventoryManagement.DTO.UserLoginDTO;
 import com.Swaptem.InventoryManagement.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -19,7 +17,7 @@ public class UserService {
     }
 
 
-    public boolean RegisterUser(User userInput){
+    public boolean registerUser(User userInput){
         userInput.setActive(true);
         User resultUser = userRepository.save(userInput);
         if(resultUser.getUserId() > 0 ){
@@ -54,8 +52,8 @@ public class UserService {
 
     public boolean deleteUserById(int userId){
         boolean succes = false;
-        User user = userRepository.findByUserIdAndActive(userId, true).orElse(null);
 
+        User user = userRepository.findByUserIdAndActive(userId, true).orElse(null);
         if(user != null){
             user.setActive(false);
             userRepository.save(user);
@@ -65,7 +63,25 @@ public class UserService {
     }
 
 
+    public User CheckUserCredentials(UserLoginDTO userInput){
+        User validatedUser = null;
 
+        User resultUser = userRepository.findUserByUsernameAndPassword(userInput.username, userInput.password).orElse(null);
+        if(resultUser != null){
+            validatedUser = resultUser;
+        }
+        return validatedUser;
+    }
+
+
+    public User getUserByUsername(String usernameInput){
+        User resultUser = null;
+        User foundUser = userRepository.findUserByUsername(usernameInput).orElse(null);
+        if(foundUser != null){
+            resultUser = foundUser;
+        }
+        return resultUser;
+    }
 
 
 
