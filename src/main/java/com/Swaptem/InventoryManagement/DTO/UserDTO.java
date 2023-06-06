@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class UserDTO {
     public String username;
-    private int currency;
+    public String password;
+    public int currency;
 
 }

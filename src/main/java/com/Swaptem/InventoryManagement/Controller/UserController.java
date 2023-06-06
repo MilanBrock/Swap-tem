@@ -67,7 +67,7 @@ public class UserController {
     }
 
 
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/{userIdInput}")
     public ResponseEntity<String> DeleteUser(@PathVariable int userIdInput, @RequestHeader String authentication){
         int userId = jwtService.getUserIdFromJwtToken(authentication);
         boolean isAdmin = userService.isUserAdmin(userId);

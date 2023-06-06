@@ -7,6 +7,7 @@ import com.Swaptem.InventoryManagement.Entity.Item;
 import com.Swaptem.InventoryManagement.Service.InventoryService;
 import com.Swaptem.InventoryManagement.Service.ItemMapper;
 import com.Swaptem.InventoryManagement.Service.JwtService;
+import com.Swaptem.InventoryManagement.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -24,30 +25,43 @@ public class InventoryController {
     final InventoryService inventoryService;
     final ItemMapper itemMapper;
     final JwtService jwtService;
+    final UserService userService;
 
     @Autowired
-    public InventoryController(InventoryService inventoryService, ItemMapper itemMapper, JwtService jwtService){
+    public InventoryController(InventoryService inventoryService, ItemMapper itemMapper, JwtService jwtService, UserService userService){
         this.inventoryService = inventoryService;
         this.itemMapper = itemMapper;
         this.jwtService = jwtService;
+        this.userService = userService;
     }
 
 
     @PutMapping("/add")
-    public ResponseEntity<String> addItemToUser(@RequestBody InventoryDTO inventoryDTO){
-        boolean succes = inventoryService.AddItemToUser(inventoryDTO.getUserId(),inventoryDTO.getItemId());
-        if (succes){
-            return new ResponseEntity<String>("Succesfully added item to inventory", HttpStatus.ACCEPTED);
+    public ResponseEntity<String> addItemToUser(@RequestBody InventoryDTO inventoryDTO, @RequestHeader String authentication){
+        int userId = jwtService.getUserIdFromJwtToken(authentication);
+        boolean isAdmin = userService.isUserAdmin(userId);
+
+        if(isAdmin){
+            boolean succes = inventoryService.AddItemToUser(inventoryDTO.getUserId(),inventoryDTO.getItemId());
+            if (succes){
+                return new ResponseEntity<String>("Succesfully added item to inventory", HttpStatus.ACCEPTED);
+            }
         }
         return new ResponseEntity<String>("Unable to add item to inventory", HttpStatus.NOT_ACCEPTABLE);
     }
 
     @PutMapping("/remove")
-    public ResponseEntity<String> removeItemFromUser(@RequestBody InventoryDTO inventoryDTO){
-        boolean succes = inventoryService.RemoveItemFromUser(inventoryDTO.getUserId(),inventoryDTO.getItemId());
-        if(succes){
-            return new ResponseEntity<String>("Succesfully removed item from inventory", HttpStatus.ACCEPTED);
+    public ResponseEntity<String> removeItemFromUser(@RequestBody InventoryDTO inventoryDTO, @RequestHeader String authentication){
+        int userId = jwtService.getUserIdFromJwtToken(authentication);
+        boolean isAdmin = userService.isUserAdmin(userId);
+
+        if(isAdmin){
+            boolean succes = inventoryService.RemoveItemFromUser(inventoryDTO.getUserId(),inventoryDTO.getItemId());
+            if(succes){
+                return new ResponseEntity<String>("Succesfully removed item from inventory", HttpStatus.ACCEPTED);
+            }
         }
+
         return new ResponseEntity<String>("Unable to remove item from inventory", HttpStatus.NOT_ACCEPTABLE);
     }
 
