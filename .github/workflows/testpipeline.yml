@@ -18,10 +18,11 @@ jobs:
         
       - name: Create the JAR file with Maven
         run: mvn package -DskipTests    
-      - name: Run the Unit tests
-        run: mvn test -Dgroups="UnitTest"
       - name: Run the Integration tests
         run: mvn test -Dgroups="IntegrationTest"
+      - name: Run the Unit tests
+        run: mvn test -Dgroups="UnitTest"
+      
         
       
         
