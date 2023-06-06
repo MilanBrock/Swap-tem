@@ -55,6 +55,9 @@ public class UserIntegrationTest {
         } else if (userId == 2) {
             loginDTO.username = "SwapGod";
             loginDTO.password = "Secret";
+        } else if(userId == 4){
+            loginDTO.username = "GatoLover";
+            loginDTO.password = "Meow";
         }
 
         try{
