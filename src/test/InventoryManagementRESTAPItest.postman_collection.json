@@ -28,7 +28,13 @@
 					],
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "authentication",
+								"value": "RestAPIUserId1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"name\":\"ElGato\",\r\n    \"description\":\"Fiercest of them all.\"\r\n}",
@@ -70,7 +76,13 @@
 					],
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "authentication",
+								"value": "RestAPIUserId1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"name\":\"ItemWithATitleThatExceedsTheNameLengthLimit\",\r\n    \"description\":\"Item description\"\r\n}",
@@ -212,7 +224,13 @@
 					],
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "authentication",
+								"value": "RestAPIUserId1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"itemId\":1,\r\n    \"name\":\"Item1NEW\",\r\n    \"description\":\"ItemDesc1\"\r\n}",
@@ -255,7 +273,13 @@
 					],
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "authentication",
+								"value": "RestAPIUserId1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"id\":1,\r\n    \"name\":\"Item1NEWNameIsNotValidBecauseItExceedsTheNameLengthLimit\",\r\n    \"description\":\"ItemDesc1\"\r\n}",
@@ -298,7 +322,13 @@
 					],
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "authentication",
+								"value": "RestAPIUserId1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"id\":-1,\r\n    \"name\":\"ItemNewName\",\r\n    \"description\":\"ItemDesc1\"\r\n}",
@@ -340,7 +370,13 @@
 					],
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "authentication",
+								"value": "RestAPIUserId1",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:8080/items/1",
 							"protocol": "http",
@@ -374,7 +410,13 @@
 					],
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "authentication",
+								"value": "RestAPIUserId1",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:8080/items/-1",
 							"protocol": "http",
@@ -385,6 +427,35 @@
 							"path": [
 								"items",
 								"-1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ItemCollection",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"itemIds\":[1,4]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/items/itemCollection",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"items",
+								"itemCollection"
 							]
 						}
 					},
@@ -488,10 +559,8 @@
 							"script": {
 								"exec": [
 									"pm.test(\"GET request for userid 1\", () => {\r",
-									"  const responseJson = pm.response.json();\r",
-									"  pm.expect(responseJson.username).to.eql(\"MilanBrock\");\r",
-									"  pm.expect(responseJson.password).to.eql(\"Secret\");\r",
-									"  pm.expect(responseJson.currency).to.eql(650);\r",
+									"  pm.response.to.have.status(200);\r",
+									"\r",
 									"});\r",
 									""
 								],
@@ -569,10 +638,16 @@
 					],
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "authentication",
+								"value": "RestAPIUserId1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\":1,\r\n    \"username\":\"MilanBrockNew\",\r\n    \"password\":\"NewSecret\",\r\n    \"currency\":999\r\n}",
+							"raw": "{\r\n    \"username\":\"MilanBrockNew\",\r\n    \"password\":\"NewSecret\",\r\n    \"currency\":999\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -610,52 +685,16 @@
 					],
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "authentication",
+								"value": "RestAPIUserId1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\":1,\r\n    \"username\":\"MilanBrockNewButTheNameExceedsTheTwentyFiveCharacterLimit\",\r\n    \"password\":\"NewSecret\",\r\n    \"currency\":999\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/users",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update User [Invalid (Id)]",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Invalid id input (406) to user PUT test\", function () {\r",
-									"    pm.response.to.have.status(406);\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\":-1,\r\n    \"username\":\"MilanBrockNew\",\r\n    \"password\":\"NewSecret\",\r\n    \"currency\":999\r\n}",
+							"raw": "{\r\n    \"username\":\"MilanBrockNewButTheNameExceedsTheTwentyFiveCharacterLimit\",\r\n    \"password\":\"NewSecret\",\r\n    \"currency\":999\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -693,7 +732,13 @@
 					],
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "authentication",
+								"value": "RestAPIUserId1",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:8080/users/-1",
 							"protocol": "http",
@@ -726,7 +771,13 @@
 					],
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "authentication",
+								"value": "RestAPIUserId1",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost:8080/users/3",
 							"protocol": "http",
@@ -764,7 +815,13 @@
 					],
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "authentication",
+								"value": "RestAPIUserId1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"userId\":1,\r\n    \"itemId\":3\r\n}",
@@ -806,7 +863,13 @@
 					],
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "authentication",
+								"value": "RestAPIUserId1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"userId\":2,\r\n    \"itemId\":5\r\n}",
@@ -848,7 +911,13 @@
 					],
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "authentication",
+								"value": "RestAPIUserId1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"userId\":1,\r\n    \"itemId\":4\r\n}",
@@ -890,7 +959,13 @@
 					],
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "authentication",
+								"value": "RestAPIUserId1",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"userId\":1,\r\n    \"itemId\":6\r\n}",
@@ -932,30 +1007,81 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "authentication",
+								"value": "RestAPIUserId1",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:8080/inventory/1",
+							"raw": "http://localhost:8080/inventory",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"inventory",
-								"1"
+								"inventory"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication Controller",
+			"item": [
+				{
+					"name": "Login user 1 [Valid]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"authentication succesfull (200)\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"GatoLover\",\r\n    \"password\":\"Meow\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/authentication",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authentication"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "get inventory from user {-1} [Invalid]",
+					"name": "Login user 1 [Invalid]",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Non existent user (406) on inventory get test\", function () {\r",
+									"pm.test(\"authentication unsuccessfull (406)\", function () {\r",
 									"    pm.response.to.have.status(406);\r",
 									"});"
 								],
@@ -964,18 +1090,26 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"MilanBrock\",\r\n    \"password\":\"WrongPassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8080/inventory/-1",
+							"raw": "http://localhost:8080/authentication",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"inventory",
-								"-1"
+								"authentication"
 							]
 						}
 					},

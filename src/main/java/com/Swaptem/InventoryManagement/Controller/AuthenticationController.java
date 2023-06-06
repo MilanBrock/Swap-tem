@@ -10,6 +10,7 @@ import com.Swaptem.InventoryManagement.Service.UserMapper;
 import com.Swaptem.InventoryManagement.Service.UserService;
 import com.Swaptem.InventoryManagement.Validation.UserValidation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,6 +49,8 @@ public class AuthenticationController {
         if(validatedUser != null){
             String jwt = jwtService.generateJwtToken(validatedUser);
             jwtResponseDTO.setJwtToken(jwt);
+        } else{
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
         }
 
         return ResponseEntity.ok(jwtResponseDTO);
