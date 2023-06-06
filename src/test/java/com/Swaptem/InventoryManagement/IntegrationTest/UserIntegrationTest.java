@@ -132,10 +132,10 @@ public class UserIntegrationTest {
     @Test
     void UpdateUser_IntegrationTest(){
         // Arrange
-        login(1);
+        login(4);
 
-        String newUsername = "MilanBrockTest";
-        String newPassword = "SecretTest";
+        String newUsername = "Ace";
+        String newPassword = "Secret";
         int newCurrency = 850;
 
         UserDTO userDTO = new UserDTO();
