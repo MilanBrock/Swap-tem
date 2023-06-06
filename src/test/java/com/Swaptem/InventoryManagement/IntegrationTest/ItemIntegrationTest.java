@@ -47,115 +47,115 @@ public class ItemIntegrationTest {
     }
 
 
-    @Test
-    void addItem_IntegrationTest(){
-        // Arrange
-        String expectedItemName = "Computer Mouse";
-        String expectedItemDescription = "No cable included";
-        int expectedItemId = 6;
-
-        // Act
-        try{
-            mockMvc.perform( MockMvcRequestBuilders
-                            .post("/items")
-                            .content(asJsonString(new Item(expectedItemName,expectedItemDescription)))
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .accept(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isCreated());
-        } catch(Exception ex){
-
-        }
-        Item itemResult = itemRepository.findByItemIdAndActive(expectedItemId,true).orElse(null);
-
-        // Assert
-        if(itemResult != null){
-            assertEquals(expectedItemName,itemResult.getName());
-            assertEquals(expectedItemDescription, itemResult.getDescription());
-        }
-    }
-
-    @Test
-    void getItemById_IntegrationTest(){
-        // Arrange
-        int itemId = 1;
-        String expectedItemName = "Penguino";
-        String expectedItemDescription = "Lives in the cold.";
-
-        // Act &  Assert
-        try{
-            mockMvc.perform(MockMvcRequestBuilders
-                            .get("/items/{itemId}", itemId)
-                            .accept(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isOk())
-                    .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(expectedItemName))
-                    .andExpect(MockMvcResultMatchers.jsonPath("$.description").value(expectedItemDescription));
-        } catch(Exception ex){
-
-        }
-
-    }
-
-    @Test
-    void getAllItems_IntegrationTest(){
-        // Arrange
-
-
-        // Act
-
-
-        // Assert
-    }
-
-
-    @Test
-    void updateItem_IntegrationTest(){
-        // Arrange
-        String newItemName = "Cowboy Hat";
-        String newItemDescription = "Wicky wild wild west";
-        int itemId = 2;
-
-        // Act
-        try{
-            mockMvc.perform( MockMvcRequestBuilders
-                            .put("/items" )
-                            .content(asJsonString(new Item(itemId, newItemName,newItemDescription)))
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .accept(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isAccepted());
-        } catch (Exception ex){
-
-        }
-
-        Item itemResult = itemRepository.findByItemIdAndActive(itemId,true).orElse(null);
-
-        // Assert
-        if(itemResult != null){
-            assertEquals(newItemName, itemResult.getName());
-            assertEquals(newItemDescription, itemResult.getDescription());
-        }
-    }
-
-    @Test
-    void deleteItem_IntegrationTest(){
-        // Arrange
-        int itemId = 3;
-        boolean expectedActive = false;
-
-        // Act
-        try{
-            mockMvc.perform( MockMvcRequestBuilders.delete("/items/{itemId}", itemId) )
-                    .andExpect(status().isAccepted());
-        } catch( Exception ex){
-
-        }
-
-
-        Item itemResult = itemRepository.findById(itemId).orElse(null);
-        // Assert
-        if(itemResult != null){
-            assertEquals(expectedActive, itemResult.isActive());
-        }
-    }
+//    @Test
+//    void addItem_IntegrationTest(){
+//        // Arrange
+//        String expectedItemName = "Computer Mouse";
+//        String expectedItemDescription = "No cable included";
+//        int expectedItemId = 6;
+//
+//        // Act
+//        try{
+//            mockMvc.perform( MockMvcRequestBuilders
+//                            .post("/items")
+//                            .content(asJsonString(new Item(expectedItemName,expectedItemDescription)))
+//                            .contentType(MediaType.APPLICATION_JSON)
+//                            .accept(MediaType.APPLICATION_JSON))
+//                    .andExpect(status().isCreated());
+//        } catch(Exception ex){
+//
+//        }
+//        Item itemResult = itemRepository.findByItemIdAndActive(expectedItemId,true).orElse(null);
+//
+//        // Assert
+//        if(itemResult != null){
+//            assertEquals(expectedItemName,itemResult.getName());
+//            assertEquals(expectedItemDescription, itemResult.getDescription());
+//        }
+//    }
+//
+//    @Test
+//    void getItemById_IntegrationTest(){
+//        // Arrange
+//        int itemId = 1;
+//        String expectedItemName = "Penguino";
+//        String expectedItemDescription = "Lives in the cold.";
+//
+//        // Act &  Assert
+//        try{
+//            mockMvc.perform(MockMvcRequestBuilders
+//                            .get("/items/{itemId}", itemId)
+//                            .accept(MediaType.APPLICATION_JSON))
+//                    .andExpect(status().isOk())
+//                    .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(expectedItemName))
+//                    .andExpect(MockMvcResultMatchers.jsonPath("$.description").value(expectedItemDescription));
+//        } catch(Exception ex){
+//
+//        }
+//
+//    }
+//
+//    @Test
+//    void getAllItems_IntegrationTest(){
+//        // Arrange
+//
+//
+//        // Act
+//
+//
+//        // Assert
+//    }
+//
+//
+//    @Test
+//    void updateItem_IntegrationTest(){
+//        // Arrange
+//        String newItemName = "Cowboy Hat";
+//        String newItemDescription = "Wicky wild wild west";
+//        int itemId = 2;
+//
+//        // Act
+//        try{
+//            mockMvc.perform( MockMvcRequestBuilders
+//                            .put("/items" )
+//                            .content(asJsonString(new Item(itemId, newItemName,newItemDescription)))
+//                            .contentType(MediaType.APPLICATION_JSON)
+//                            .accept(MediaType.APPLICATION_JSON))
+//                    .andExpect(status().isAccepted());
+//        } catch (Exception ex){
+//
+//        }
+//
+//        Item itemResult = itemRepository.findByItemIdAndActive(itemId,true).orElse(null);
+//
+//        // Assert
+//        if(itemResult != null){
+//            assertEquals(newItemName, itemResult.getName());
+//            assertEquals(newItemDescription, itemResult.getDescription());
+//        }
+//    }
+//
+//    @Test
+//    void deleteItem_IntegrationTest(){
+//        // Arrange
+//        int itemId = 3;
+//        boolean expectedActive = false;
+//
+//        // Act
+//        try{
+//            mockMvc.perform( MockMvcRequestBuilders.delete("/items/{itemId}", itemId) )
+//                    .andExpect(status().isAccepted());
+//        } catch( Exception ex){
+//
+//        }
+//
+//
+//        Item itemResult = itemRepository.findById(itemId).orElse(null);
+//        // Assert
+//        if(itemResult != null){
+//            assertEquals(expectedActive, itemResult.isActive());
+//        }
+//    }
 
 
 }

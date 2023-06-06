@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface UserRepositoryCustom extends UserRepositoryInterface{
     Optional<User> findByUserIdAndActive(int userId, boolean active);
     Optional<User> findUserByUsernameAndPassword(String username, String password);
-    Optional<User> findUserByUsername(String username);
+    Optional<User> findUserByUserIdAndAdmin(int userId, boolean admin);
 }

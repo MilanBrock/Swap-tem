@@ -26,7 +26,7 @@ public class ItemRepositoryTest implements ItemRepositoryInterface, ItemReposito
 
     public void ListFill(){
         Item item1 = new Item(1,"ItemEen","ItemEenDescription", true);
-        User item2Owner = new User(2, "UsernameTWEE", "UserPasswordTWEE", 300, true);
+        User item2Owner = new User(2, "UsernameTWEE", "UserPasswordTWEE", 300, true, false);
         Item item2 = new Item(2,"ItemTwee","ItemTweeDescription", item2Owner, true);
         Item item3 = new Item(3,"ItemDrie","ItemDrieDescription", true);
         items.add(item1);

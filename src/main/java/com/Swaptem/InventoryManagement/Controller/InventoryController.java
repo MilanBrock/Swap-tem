@@ -6,6 +6,7 @@ import com.Swaptem.InventoryManagement.DTO.ItemDTO;
 import com.Swaptem.InventoryManagement.Entity.Item;
 import com.Swaptem.InventoryManagement.Service.InventoryService;
 import com.Swaptem.InventoryManagement.Service.ItemMapper;
+import com.Swaptem.InventoryManagement.Service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -22,11 +23,13 @@ public class InventoryController {
 
     final InventoryService inventoryService;
     final ItemMapper itemMapper;
+    final JwtService jwtService;
 
     @Autowired
-    public InventoryController(InventoryService inventoryService, ItemMapper itemMapper){
+    public InventoryController(InventoryService inventoryService, ItemMapper itemMapper, JwtService jwtService){
         this.inventoryService = inventoryService;
         this.itemMapper = itemMapper;
+        this.jwtService = jwtService;
     }
 
 
@@ -48,8 +51,10 @@ public class InventoryController {
         return new ResponseEntity<String>("Unable to remove item from inventory", HttpStatus.NOT_ACCEPTABLE);
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<List<ItemDTO>> getInventory(@PathVariable int userId){
+    @GetMapping("")
+    public ResponseEntity<List<ItemDTO>> getInventory(@RequestHeader String authentication){
+        int userId = jwtService.getUserIdFromJwtToken(authentication);
+
         List<ItemDTO> itemDTOs = new ArrayList<>();
         List<Item> items = inventoryService.GetItemsByUserId(userId);
         if(items.size() > 0){

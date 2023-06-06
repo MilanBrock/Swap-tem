@@ -19,6 +19,7 @@ public class UserService {
 
     public boolean registerUser(User userInput){
         userInput.setActive(true);
+        userInput.setAdmin(false);
         User resultUser = userRepository.save(userInput);
         if(resultUser.getUserId() > 0 ){
             return true;
@@ -74,13 +75,13 @@ public class UserService {
     }
 
 
-    public User getUserByUsername(String usernameInput){
-        User resultUser = null;
-        User foundUser = userRepository.findUserByUsername(usernameInput).orElse(null);
-        if(foundUser != null){
-            resultUser = foundUser;
+    public boolean isUserAdmin(int userIdInput){
+        boolean isAdmin = false;
+        User user = userRepository.findUserByUserIdAndAdmin(userIdInput, true).orElse(null);
+        if(user != null){
+            isAdmin = true;
         }
-        return resultUser;
+        return isAdmin;
     }
 
 

@@ -18,20 +18,20 @@ public class JwtService {
         String userIdString = userIdInteger.toString();
 
         return Jwts.builder()
-                .setSubject("1")
+                .setSubject(userIdString)
                 .setIssuedAt(new Date(currentTimeMillis))
                 .setExpiration(new Date(expirationTimeMillis))
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
                 .compact();
     }
 
-    public String getUserIdFromJwtToken(String token) {
-
-        return Jwts.parser()
+    public int getUserIdFromJwtToken(String token) {
+        int userId = Integer.parseInt(Jwts.parser()
                 .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody()
-                .getSubject();
+                .getSubject());
+        return userId;
     }
 }
 

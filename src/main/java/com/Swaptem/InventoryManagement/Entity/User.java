@@ -18,6 +18,7 @@ public class User {
     private String password;
     private int currency;
     private boolean active;
+    private boolean admin;
 
 
     public User (String usernameInput, String passwordInput, int currencyInput){
@@ -33,11 +34,12 @@ public class User {
         this.currency = currencyInput;
     }
 
-    public User (String usernameInput, String passwordInput, int currencyInput, boolean activeInput){
+    public User (String usernameInput, String passwordInput, int currencyInput, boolean activeInput, boolean adminInput){
         this.username = usernameInput;
         this.password = passwordInput;
         this.currency = currencyInput;
         this.active = activeInput;
+        this.admin = adminInput;
     }
 
 

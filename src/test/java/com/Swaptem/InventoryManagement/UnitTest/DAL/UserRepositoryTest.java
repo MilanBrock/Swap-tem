@@ -24,9 +24,9 @@ public class UserRepositoryTest implements UserRepositoryInterface, UserReposito
     }
 
     public void ListFill(){
-        User user1 = new User(1, "UsernameEEN", "UserPasswordEEN", 500, true);
-        User user2 = new User(2, "UsernameTWEE", "UserPasswordTWEE", 300, true);
-        User user3 = new User(3, "UsernameDRIE", "UserPasswordDRIE", 865, true);
+        User user1 = new User(1, "UsernameEEN", "UserPasswordEEN", 500, true, false);
+        User user2 = new User(2, "UsernameTWEE", "UserPasswordTWEE", 300, true, false);
+        User user3 = new User(3, "UsernameDRIE", "UserPasswordDRIE", 865, true, false);
         users.add(user1);
         users.add(user2);
         users.add(user3);
@@ -89,7 +89,7 @@ public class UserRepositoryTest implements UserRepositoryInterface, UserReposito
     }
 
     @Override
-    public Optional<User> findUserByUsername(String username) {
+    public Optional<User> findUserByUserIdAndAdmin(int userId, boolean admin) {
         return Optional.empty();
     }
 

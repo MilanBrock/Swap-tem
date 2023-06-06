@@ -2,6 +2,7 @@ package com.Swaptem.InventoryManagement.Controller;
 
 import com.Swaptem.InventoryManagement.DTO.UserDTO;
 import com.Swaptem.InventoryManagement.Entity.User;
+import com.Swaptem.InventoryManagement.Service.JwtService;
 import com.Swaptem.InventoryManagement.Service.UserMapper;
 import com.Swaptem.InventoryManagement.Service.UserService;
 import com.Swaptem.InventoryManagement.Validation.UserValidation;
@@ -18,12 +19,14 @@ public class UserController {
     final UserService userService;
     final UserValidation userValidation;
     final UserMapper userMapper;
+    final JwtService jwtService;
 
     @Autowired
-    public UserController(UserService userServiceInput, UserValidation userValidationInput, UserMapper userMapper){
+    public UserController(UserService userServiceInput, UserValidation userValidationInput, UserMapper userMapper, JwtService jwtService){
         this.userService = userServiceInput;
         this.userValidation = userValidationInput;
         this.userMapper = userMapper;
+        this.jwtService = jwtService;
     }
 
     @PostMapping()
@@ -48,10 +51,13 @@ public class UserController {
     }
 
     @PutMapping()
-    public ResponseEntity<String> UpdateUser(@RequestBody UserDTO userDTOInput){
+    public ResponseEntity<String> UpdateUser(@RequestBody UserDTO userDTOInput, @RequestHeader String authentication){
+        int userId = jwtService.getUserIdFromJwtToken(authentication);
+
         boolean succes = false;
         if(userValidation.UsernameIsValid(userDTOInput.getUsername())){
             User user = userMapper.ToUser(userDTOInput);
+            user.setUserId(userId);
             succes = userService.updateUser(user);
             if(succes){
                 return new ResponseEntity<>("User updated", HttpStatus.ACCEPTED);
@@ -62,15 +68,20 @@ public class UserController {
 
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<String> DeleteUser(@PathVariable int userId){
-        User user = userService.getUserById(userId);
-        if(user != null){
-            boolean succes = userService.deleteUserById(userId);
+    public ResponseEntity<String> DeleteUser(@PathVariable int userIdInput, @RequestHeader String authentication){
+        int userId = jwtService.getUserIdFromJwtToken(authentication);
+        boolean isAdmin = userService.isUserAdmin(userId);
+
+
+        User user = userService.getUserById(userIdInput);
+        if(isAdmin && user != null){
+            boolean succes = userService.deleteUserById(userIdInput);
             if (succes){
                 return new ResponseEntity<>("User deleted", HttpStatus.ACCEPTED);
             }
+            return new ResponseEntity<>("User not deleted", HttpStatus.NOT_ACCEPTABLE);
         }
-        return new ResponseEntity<>("User not deleted", HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<>("Requesting user is not an admin", HttpStatus.NOT_ACCEPTABLE);
     }
     
 }

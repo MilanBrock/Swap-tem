@@ -2,9 +2,12 @@ package com.Swaptem.InventoryManagement.Controller;
 
 import com.Swaptem.InventoryManagement.DTO.ItemCollectionDTO;
 import com.Swaptem.InventoryManagement.DTO.ItemDTO;
+import com.Swaptem.InventoryManagement.Entity.User;
 import com.Swaptem.InventoryManagement.Service.ItemMapper;
 import com.Swaptem.InventoryManagement.Service.ItemService;
 import com.Swaptem.InventoryManagement.Entity.Item;
+import com.Swaptem.InventoryManagement.Service.JwtService;
+import com.Swaptem.InventoryManagement.Service.UserService;
 import com.Swaptem.InventoryManagement.Validation.ItemValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,17 +26,24 @@ public class ItemController {
     final ItemService itemService;
     final ItemMapper itemMapper;
     final ItemValidation itemValidation;
+    final UserService userService;
+    final JwtService jwtService;
 
     @Autowired
-    public ItemController(ItemService itemServiceInput, ItemMapper itemMapper, ItemValidation itemValidation){
+    public ItemController(ItemService itemServiceInput, ItemMapper itemMapper, ItemValidation itemValidation, UserService userService, JwtService jwtService){
         this.itemService = itemServiceInput;
         this.itemMapper = itemMapper;
         this.itemValidation = itemValidation;
+        this.userService = userService;
+        this.jwtService = jwtService;
     }
 
     @PostMapping()
-    public ResponseEntity<String> addItem(@RequestBody Item item){
-        if(itemValidation.ItemNameIsValid(item.getName()) && itemValidation.ItemDescriptionIsValid(item.getDescription())){
+    public ResponseEntity<String> addItem(@RequestBody Item item, @RequestHeader String authentication){
+        int userId = jwtService.getUserIdFromJwtToken(authentication);
+        boolean isAdmin = userService.isUserAdmin(userId);
+
+        if(isAdmin && itemValidation.ItemNameIsValid(item.getName()) && itemValidation.ItemDescriptionIsValid(item.getDescription())){
             itemService.createItem(item);
             return new ResponseEntity<>("Item added", HttpStatus.CREATED);
         }
@@ -78,24 +88,33 @@ public class ItemController {
     }
 
     @PutMapping()
-    public ResponseEntity<String> updateItem(@RequestBody Item item){
-        boolean succes = false;
-        if(itemValidation.ItemNameIsValid(item.getName()) && itemValidation.ItemDescriptionIsValid(item.getDescription())){
-            succes = itemService.updateItem(item);
+    public ResponseEntity<String> updateItem(@RequestBody Item item, @RequestHeader String authentication){
+        int userId = jwtService.getUserIdFromJwtToken(authentication);
+        boolean isAdmin = userService.isUserAdmin(userId);
+
+        if(isAdmin && itemValidation.ItemNameIsValid(item.getName()) && itemValidation.ItemDescriptionIsValid(item.getDescription())){
+            boolean succes = itemService.updateItem(item);
             if(succes){
                 return new ResponseEntity<>("Item updated", HttpStatus.ACCEPTED);
             }
+            return new ResponseEntity<>("Item not updated", HttpStatus.NOT_ACCEPTABLE);
         }
-        return new ResponseEntity<>("Item not updated", HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<>("Requesting user is not an admin", HttpStatus.NOT_ACCEPTABLE);
+
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteItem(@PathVariable int id){
-        boolean succes = itemService.deleteItemById(id);
-        if(succes){
-            return new ResponseEntity<>("Item deleted", HttpStatus.ACCEPTED);
-        }
-        return new ResponseEntity<>("Item not deleted", HttpStatus.NOT_ACCEPTABLE);
+    public ResponseEntity<String> deleteItem(@PathVariable int id, @RequestHeader String authentication){
+        int userId = jwtService.getUserIdFromJwtToken(authentication);
+        boolean isAdmin = userService.isUserAdmin(userId);
 
+        if(isAdmin){
+            boolean succes = itemService.deleteItemById(id);
+            if(succes){
+                return new ResponseEntity<>("Item deleted", HttpStatus.ACCEPTED);
+            }
+            return new ResponseEntity<>("Item not deleted, incorrect item id", HttpStatus.NOT_ACCEPTABLE);
+        }
+        return new ResponseEntity<>("Requesting user is not an admin", HttpStatus.NOT_ACCEPTABLE);
     }
 }

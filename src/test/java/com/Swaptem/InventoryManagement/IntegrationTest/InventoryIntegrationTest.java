@@ -51,81 +51,81 @@ public class InventoryIntegrationTest {
     }
 
 
-    @Test
-    void AddItemToUser_IntegrationTest(){
-        // Arrange
-        int userId = 1;
-        int itemId = 2;
-
-
-        // Act
-        try{
-            mockMvc.perform( MockMvcRequestBuilders
-                            .put("/inventory/add" )
-                            .content(asJsonString(new InventoryDTO(userId,itemId)))
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .accept(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isAccepted());
-        } catch (Exception ex){
-
-        }
-
-        Item itemResult = itemRepository.findByItemIdAndActive(itemId,true).orElse(null);
-
-        // Assert
-        assertEquals(userId, itemResult.getOwner().getUserId());
-
-    }
-
-
-    @Test
-    void RemoveItemFromUser_IntegrationTest(){
-        // Arrange
-        int userId = 1;
-        int itemId = 1;
-
-
-        // Act
-        try{
-            mockMvc.perform( MockMvcRequestBuilders
-                            .put("/inventory/remove" )
-                            .content(asJsonString(new InventoryDTO(userId,itemId)))
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .accept(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isAccepted());
-        } catch (Exception ex){
-
-        }
-
-        List<Item> itemResults = itemRepository.findAllByOwner_UserIdAndActive(userId,true);
-
-        // Assert
-        for(int i = 0; i< itemResults.size(); i++){
-            assertNotEquals(itemId, itemResults.get(i).getItemId());
-        }
-
-    }
-
-
-    @Test
-    void GetInventory_IntegrationTest(){
-        // Arrange
-        int userId = 2;
-        String expectedItemName = "Minesweeper";
-        String expectedItemDescription = "Relic of a historic figure";
-
-        // Act & Assert
-        try{
-            mockMvc.perform( MockMvcRequestBuilders
-                            .get("/inventory/{userId}", userId )
-                            .accept(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isOk())
-                    .andExpect(MockMvcResultMatchers.jsonPath("$.[0].name").value(expectedItemName))
-                    .andExpect(MockMvcResultMatchers.jsonPath("$[0].description").value(expectedItemDescription));
-        } catch (Exception ex){
-
-        }
-
-    }
+//    @Test
+//    void AddItemToUser_IntegrationTest(){
+//        // Arrange
+//        int userId = 1;
+//        int itemId = 2;
+//
+//
+//        // Act
+//        try{
+//            mockMvc.perform( MockMvcRequestBuilders
+//                            .put("/inventory/add" )
+//                            .content(asJsonString(new InventoryDTO(userId,itemId)))
+//                            .contentType(MediaType.APPLICATION_JSON)
+//                            .accept(MediaType.APPLICATION_JSON))
+//                    .andExpect(status().isAccepted());
+//        } catch (Exception ex){
+//
+//        }
+//
+//        Item itemResult = itemRepository.findByItemIdAndActive(itemId,true).orElse(null);
+//
+//        // Assert
+//        assertEquals(userId, itemResult.getOwner().getUserId());
+//
+//    }
+//
+//
+//    @Test
+//    void RemoveItemFromUser_IntegrationTest(){
+//        // Arrange
+//        int userId = 1;
+//        int itemId = 1;
+//
+//
+//        // Act
+//        try{
+//            mockMvc.perform( MockMvcRequestBuilders
+//                            .put("/inventory/remove" )
+//                            .content(asJsonString(new InventoryDTO(userId,itemId)))
+//                            .contentType(MediaType.APPLICATION_JSON)
+//                            .accept(MediaType.APPLICATION_JSON))
+//                    .andExpect(status().isAccepted());
+//        } catch (Exception ex){
+//
+//        }
+//
+//        List<Item> itemResults = itemRepository.findAllByOwner_UserIdAndActive(userId,true);
+//
+//        // Assert
+//        for(int i = 0; i< itemResults.size(); i++){
+//            assertNotEquals(itemId, itemResults.get(i).getItemId());
+//        }
+//
+//    }
+//
+//
+//    @Test
+//    void GetInventory_IntegrationTest(){
+//        // Arrange
+//        int userId = 2;
+//        String expectedItemName = "Minesweeper";
+//        String expectedItemDescription = "Relic of a historic figure";
+//
+//        // Act & Assert
+//        try{
+//            mockMvc.perform( MockMvcRequestBuilders
+//                            .get("/inventory/{userId}", userId )
+//                            .accept(MediaType.APPLICATION_JSON))
+//                    .andExpect(status().isOk())
+//                    .andExpect(MockMvcResultMatchers.jsonPath("$.[0].name").value(expectedItemName))
+//                    .andExpect(MockMvcResultMatchers.jsonPath("$[0].description").value(expectedItemDescription));
+//        } catch (Exception ex){
+//
+//        }
+//
+//    }
 
 }

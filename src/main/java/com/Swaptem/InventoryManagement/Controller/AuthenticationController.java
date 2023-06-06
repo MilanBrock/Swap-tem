@@ -53,12 +53,9 @@ public class AuthenticationController {
         return ResponseEntity.ok(jwtResponseDTO);
     }
 
-    @PostMapping("/showme")
-    public ResponseEntity<String> getUserFromToken(@RequestBody JwtResponseDTO tokenInput){
-        String userIdResult = jwtService.getUserIdFromJwtToken(tokenInput.getJwtToken());
-        return ResponseEntity.ok(userIdResult);
 
-    }
+
+
 
 
 

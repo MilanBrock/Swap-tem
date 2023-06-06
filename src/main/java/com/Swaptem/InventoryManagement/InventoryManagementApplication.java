@@ -21,14 +21,17 @@ public class InventoryManagementApplication {
 	@Bean
 	CommandLineRunner run(UserRepositoryInterface userRepositoryInterface, ItemRepositoryInterface itemRepositoryInterface){
 		return args -> {
-			User userMilan = new User(1,"MilanBrock","Secret",650, true);
+			User userMilan = new User(1,"MilanBrock","Secret",650, true, true);
 			userRepositoryInterface.save(userMilan);
 
-			User userSwapGod = new User(2,"SwapGod","Secret",9650, true);
+			User userSwapGod = new User(2,"SwapGod","Secret",9650, true, false);
 			userRepositoryInterface.save(userSwapGod);
 
-			User userToBeDeleted = new User(3,"ToBeDeleted","Goodbye",0, true);
+			User userToBeDeleted = new User(3,"ToBeDeleted","Goodbye",0, true, false);
 			userRepositoryInterface.save(userToBeDeleted);
+
+			User userGatoLover = new User(4,"GatoLover","Meow",0, true, false);
+			userRepositoryInterface.save(userGatoLover);
 
 			Item itemPenguino = new Item(1, "Penguino","Lives in the cold.", userMilan, true);
 			itemRepositoryInterface.save(itemPenguino);
