@@ -159,7 +159,7 @@ public class UserIntegrationTest {
 
         }
 
-        User userResult = userRepository.findById(1).orElse(null);
+        User userResult = userRepository.findById(4).orElse(null);
 
         // Assert
         if(userResult != null){
