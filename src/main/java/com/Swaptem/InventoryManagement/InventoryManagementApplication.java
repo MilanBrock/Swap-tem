@@ -33,6 +33,18 @@ public class InventoryManagementApplication {
 			User userGatoLover = new User(4,"GatoLover","Meow",0, true, false);
 			userRepositoryInterface.save(userGatoLover);
 
+			User userSaiPres = new User(5,"PresidentSai","Test",500, true, false);
+			userRepositoryInterface.save(userSaiPres);
+
+			User userBigStepper = new User(6,"BigStepper","Money",1500, true, false);
+			userRepositoryInterface.save(userBigStepper);
+
+			User userMisser = new User(7,"JettMisser","Cry",1500, true, false);
+			userRepositoryInterface.save(userMisser);
+
+			User userSkipper = new User(8,"Skipper","Hermes",0, true, false);
+			userRepositoryInterface.save(userSkipper);
+
 			Item itemPenguino = new Item(1, "Penguino","Lives in the cold.", userMilan, true);
 			itemRepositoryInterface.save(itemPenguino);
 
@@ -50,6 +62,12 @@ public class InventoryManagementApplication {
 
 			Item itemSweeper = new Item(5, "Minesweeper","Relic of a historic figure", userSwapGod, true);
 			itemRepositoryInterface.save(itemSweeper);
+
+			Item itemBingus	= new Item(6, "Bingus", "Goofy goober", userGatoLover, true);
+			itemRepositoryInterface.save(itemBingus);
+
+			Item itemFlag	= new Item(7, "Flag", "Red white and blue", userSaiPres, true);
+			itemRepositoryInterface.save(itemFlag);
 		};
 	}
 }

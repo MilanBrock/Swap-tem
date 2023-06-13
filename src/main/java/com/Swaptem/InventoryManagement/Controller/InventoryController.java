@@ -67,17 +67,17 @@ public class InventoryController {
 
     @GetMapping("")
     public ResponseEntity<List<ItemDTO>> getInventory(@RequestHeader String authentication){
-        int userId = jwtService.getUserIdFromJwtToken(authentication);
-
-        List<ItemDTO> itemDTOs = new ArrayList<>();
-        List<Item> items = inventoryService.GetItemsByUserId(userId);
-        if(items.size() > 0){
-            for(int i = 0; i < items.size(); i++){
-                itemDTOs.add(itemMapper.toItemDTO(items.get(i)));
+        if(!authentication.contains("null")){
+            int userId = jwtService.getUserIdFromJwtToken(authentication);
+            List<ItemDTO> itemDTOs = new ArrayList<>();
+            List<Item> items = inventoryService.GetItemsByUserId(userId);
+            if(items.size() > 0){
+                for(int i = 0; i < items.size(); i++){
+                    itemDTOs.add(itemMapper.toItemDTO(items.get(i)));
+                }
+                return ResponseEntity.ok(itemDTOs);
             }
-            return ResponseEntity.ok(itemDTOs);
         }
-
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
     }
 }

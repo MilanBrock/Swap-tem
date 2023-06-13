@@ -83,7 +83,7 @@ public class UserIntegrationTest {
         String expectedUsername = "MilanBrockTest";
         String expectedPassword = "SecretTest";
         int expectedCurrency = 780;
-        int expectedUserId = 5;
+        int expectedUserId = 9;
 
         // Act
         try{

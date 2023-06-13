@@ -81,7 +81,7 @@ public class ItemIntegrationTest {
         login(1);
         String expectedItemName = "Computer Mouse";
         String expectedItemDescription = "No cable included";
-        int expectedItemId = 6;
+        int expectedItemId = 8;
 
         // Act
         try{
